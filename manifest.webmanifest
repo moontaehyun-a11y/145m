@@ -1,0 +1,17 @@
+{
+  "name": "국궁 145m 시뮬레이터",
+  "short_name": "국궁 시지",
+  "description": "시사 5발로 표 잡기, 실시간 표 이동 시지, 환경 3D",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4efe4",
+  "theme_color": "#f4efe4",
+  "lang": "ko",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
