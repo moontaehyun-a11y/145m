@@ -35,6 +35,23 @@ header h1 span{color:var(--red)}
 @supports (height:100dvh){.work{height:calc(100dvh - var(--hh))}}
 .board{position:relative;padding:12px;min-height:0;display:flex;flex-direction:column}
 .board canvas{flex:1;width:100%;min-height:0;display:block;background:#e9e4d8;border-radius:10px;border:1px solid var(--line);touch-action:none;cursor:crosshair}
+.boardbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.boardbar .btn{padding:10px 14px;font-weight:600}
+.boardbar .bb-main{border-color:var(--blue);color:var(--blue)}
+.boardbar .bb-main.on{background:var(--blue);color:#fff}
+.rs{font-size:26px;font-weight:800;color:var(--red);letter-spacing:-.5px;margin-right:6px;vertical-align:-2px}
+.rs-sm{font-size:11.5px;font-weight:500;color:var(--ink2)}
+.aw{display:flex;align-items:center;gap:8px;margin-top:6px;padding:5px 8px 5px 5px;border-radius:8px;background:rgba(244,239,228,.7)}
+.aw.hot{background:rgba(194,54,43,.1);box-shadow:inset 0 0 0 1.5px rgba(194,54,43,.55)}
+.aw-ic{flex:none;display:block}
+.aw-ic.calm{width:46px;text-align:center;font-size:26px;color:#3b5a78}
+.aw-t{display:flex;flex-direction:column;line-height:1.3}
+.aw-t b{font-size:15px;font-weight:800;color:var(--ink)}
+.aw-s{font-size:11px;font-weight:500;color:var(--ink2)}
+.rs-act{font-size:24px;font-weight:800;letter-spacing:-.5px;line-height:1.25;margin-top:2px}
+.rs-act.aim{color:#1f4f8a}
+.rs-act.hit{color:var(--ink)}
+.rs-note{font-size:11px;font-weight:500;color:var(--ink3,#8a8478);margin-top:2px}
 .board .tip{position:absolute;left:24px;top:22px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600;pointer-events:none;max-width:70%}
 .side{overflow-y:auto;border-left:1px solid var(--line);background:var(--paper);padding:14px 16px 24px}
 .side h2{font-family:'Noto Serif KR',serif;font-size:17px;margin:2px 0 10px}
@@ -70,10 +87,30 @@ header h1 span{color:var(--red)}
 .ptrack{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,#c8553d,#e8d9b5 50%,#3b6fa8)}
 .pfill{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
 .wlab{display:flex;justify-content:space-between;font-size:11px;color:var(--ink2);margin:8px 0 -4px 78px}
+.persinfo{font-size:12px;line-height:1.55;color:#4a4238;background:#f3ecdd;border-radius:7px;padding:7px 9px;margin:2px 0 8px}
+.persinfo ul{margin:4px 0 4px 16px;padding:0}
+.persinfo li{margin:1px 0}
 .perstog{display:block;width:100%;margin-top:10px;font:inherit;font-size:13px;text-align:left;border:1px dashed var(--line);background:var(--paper);border-radius:7px;padding:8px 10px;cursor:pointer;color:var(--ink2)}
 .pers{margin-top:6px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fbf8f1}
+.persfloat{position:absolute;right:22px;top:64px;width:min(380px,calc(100% - 44px));max-height:calc(100% - 90px);overflow:auto;background:rgba(251,248,241,.95);box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:6;margin:0;padding:10px 12px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.floatbtn.on,#guideTog3.on,#prevTog.on,#kToggle.on{background:#b3261e !important;color:#fff;border-color:#b3261e}
+.floatbtn{position:absolute;right:24px;top:22px;z-index:5;background:rgba(255,255,255,.95);font-weight:600}
+@media (max-width:860px){.persfloat{top:auto;bottom:16px;right:14px;max-height:55%}}
 .pers .slider{grid-template-columns:86px 1fr 96px}
 .linkbtn{font:inherit;font-size:12px;border:none;background:none;color:var(--blue);text-decoration:underline;cursor:pointer;padding:0}
+.psign{margin:-2px 0 0 74px;font-size:11.5px;color:var(--ink2)}
+.wguide{margin:4px 0 0 74px;font-size:11.5px;color:var(--ink2)}
+.wguide summary{cursor:pointer;color:var(--blue)}
+.wguide table{border-collapse:collapse;margin-top:4px;width:100%}
+.wguide td{padding:2px 4px;border-bottom:1px dashed var(--line);vertical-align:top}
+.wguide td:first-child{white-space:nowrap;font-weight:600;color:var(--ink)}
+.wguide tr.on td{background:#fbe9e5}
+.pchips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:4px 0 2px 74px;font-size:11px;color:var(--ink2)}
+.pchips button{font:inherit;font-size:11.5px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:3px 8px;cursor:pointer}
+.pchips button.on{border-color:var(--ink);background:var(--paper2)}
+.stepdesc{font-size:13px;line-height:1.5;color:#3b342c;background:#fbf3e3;border-left:3px solid var(--ochre, #b9822e);border-radius:5px;padding:6px 9px;margin:6px 0 4px}
+.skipbox{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink2)}
+.skipbox .btn{border-color:var(--blue);color:var(--blue);font-weight:600}
 .pinfo{font-size:12.5px;background:var(--paper);border-radius:7px;padding:7px 9px;margin-top:6px;line-height:1.55}
 .nudge{display:flex;align-items:center;gap:5px;margin-top:8px}
 .nudge .lab{margin-right:auto}
@@ -98,19 +135,43 @@ td.cnt{font-weight:800;font-size:15px;color:var(--red);font-family:'Noto Serif K
 .viewbar{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
 .viewbar button{font:inherit;font-size:13px;border:1px solid rgba(31,28,24,.25);background:rgba(244,239,228,.92);padding:7px 11px;border-radius:7px;cursor:pointer}
 .viewbar button.on{background:var(--ink);color:var(--paper)}
-.envhud{position:absolute;right:10px;bottom:10px;max-width:min(300px,calc(100% - 20px));background:rgba(244,239,228,.88);border:1px solid rgba(31,28,24,.18);border-radius:9px;padding:6px 10px;z-index:2;font-size:12.5px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.envhud{position:absolute;right:10px;bottom:var(--nh,10px);max-width:min(300px,calc(100% - 20px));background:rgba(244,239,228,.88);border:1px solid rgba(31,28,24,.18);border-radius:9px;padding:6px 10px;z-index:2;font-size:12.5px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .envhud .sum{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .envhud .sum b{font-size:13.5px}
 .envhud .tog{margin-left:auto;font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:2px 8px;cursor:pointer;white-space:nowrap}
 .envhud .more{margin-top:6px;border-top:1px solid rgba(31,28,24,.12);padding-top:6px;line-height:1.55}
 .envhud .more[hidden]{display:none}
 .envhud canvas{width:100%;height:70px;display:block;margin-top:5px;background:#fff;border-radius:6px;border:1px solid var(--line)}
-.legend{position:absolute;left:10px;bottom:10px;background:rgba(244,239,228,.88);border:1px solid rgba(31,28,24,.18);border-radius:9px;padding:5px 10px;font-size:12px;line-height:1.6;z-index:2;max-width:min(340px,calc(100% - 20px))}
+.legend{position:absolute;left:10px;bottom:var(--nh,10px);background:rgba(244,239,228,.88);border:1px solid rgba(31,28,24,.18);border-radius:9px;padding:5px 10px;font-size:12px;line-height:1.6;z-index:2;max-width:min(340px,calc(100% - 20px))}
 .legend .lt{cursor:pointer;user-select:none;font-weight:600}
 .legend .body[hidden]{display:none}
-@media (max-width:860px){.envhud{bottom:auto;top:52px;right:8px}.legend{left:8px;bottom:8px}}
+@media (max-width:860px){.envhud{bottom:auto;top:52px;right:8px}.legend{left:8px;bottom:var(--nh,8px)}}
+.envstory{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;background:rgba(31,28,24,.82);color:#fff;border-radius:10px;padding:9px 14px;font-size:14.5px;line-height:1.5;font-weight:500;text-align:center}
+.envstory:empty{display:none}
 .legend .k{display:inline-block;width:20px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
 /* 설정 */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-h{text-align:center;font-size:12px;font-weight:700;color:var(--ink2);padding:2px 0}
+.cal-h.sun,.cal-d.sun .cal-dn{color:#b0362b}.cal-h.sat,.cal-d.sat .cal-dn{color:#2f5f8f}
+.cal-d{font:inherit;min-height:58px;border:1px solid var(--line);background:#fff;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;padding:4px 2px;cursor:pointer}
+.cal-d.has{background:#fbf8f0}
+.cal-d.today{border-color:var(--ink);border-width:2px}
+.cal-d.sel{box-shadow:0 0 0 2.5px var(--red)}
+.cal-dn{font-size:12.5px;font-weight:700}
+.cal-b{color:#fff;font-size:11.5px;font-weight:800;border-radius:9px;padding:0 6px;line-height:17px}
+.cal-n{font-size:10px;color:var(--ink2)}
+.cal-dh{font-size:15px;margin-top:4px}
+.cal-big{font-size:15px;margin-top:2px}.cal-big span{font-size:24px;font-weight:800;color:var(--red)}.cal-big small{color:var(--ink2);font-size:11.5px}
+.cal-story{background:#f4efe4;border-radius:8px;padding:7px 10px;font-size:13px;line-height:1.5;margin-bottom:8px}
+.cal-sheet .cell{display:inline-block;position:relative;cursor:default}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:rgba(31,28,24,.92);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:92vw;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.devask{position:absolute;left:50%;top:110px;transform:translateX(-50%);z-index:7;width:min(460px,calc(100% - 40px));background:rgba(255,255,255,.97);border:2px solid var(--red);border-radius:12px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.2);text-align:center}
+.devask[hidden]{display:none}
+.devask .dv-t{font-size:16px;font-weight:800;color:var(--red);line-height:1.4}
+.devask .dv-s{font-size:12.5px;line-height:1.55;margin:6px 0 10px}
+.devask .dv-b{display:flex;gap:8px;justify-content:center}.devask .dv-b .btn{min-width:96px;font-weight:700;font-size:15px}
+@media (max-width:600px){.devask{top:120px;width:calc(100% - 24px)}}
 .drawer{position:fixed;inset:0;z-index:50;background:rgba(31,28,24,.35);display:flex;justify-content:flex-end}
 .drawer[hidden]{display:none}
 #no3d[hidden]{display:none !important}
@@ -125,6 +186,13 @@ input[type=number],input[type=text],input[type=date],select,textarea{font:inheri
 textarea{font:12px ui-monospace,Menlo,monospace}
 .chk{display:flex;align-items:center;gap:7px;font-size:13px;margin-top:8px}
 .warn{color:#9a3b12}
+/* 습사 과녁을 크게: 과녁 그림이 화면 높이를 거의 다 쓰고, 아래 칸은 스크롤로 */
+#tab-sheet .work{height:auto;min-height:calc(100vh - var(--hh))}
+#tab-sheet .board{display:block}
+#tab-sheet .cvwrap{height:calc(100vh - var(--hh) - 90px);min-height:520px}
+@supports (height:100dvh){#tab-sheet .cvwrap{height:calc(100dvh - var(--hh) - 90px)}}
+#tab-sheet .cvwrap canvas{flex:1;width:100%;height:100%;display:block;background:#e9e4d8;border-radius:10px;border:1px solid var(--line);touch-action:pan-y;cursor:crosshair}
+#tab-sheet .side{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));align-self:start}
 @media (pointer:coarse){
   input,select,textarea{font-size:16px !important}
   .chk input{width:20px;height:20px}
@@ -133,10 +201,51 @@ textarea{font:12px ui-monospace,Menlo,monospace}
 @media (max-width:860px){
   header h1{font-size:15px}
   .tabs button{padding:7px 10px;font-size:13px}
+}
+@media (max-width:480px){
   .tabs button .t{display:none}
+  header{gap:6px;padding:0 8px}
+  header h1{font-size:13.5px}
+  .tabs{gap:4px}
+  .tabs button{padding:6px 8px;font-size:12.5px}
+  .tabs button .n{width:17px;height:17px;margin-right:3px}
+  .gear{width:34px;height:34px;font-size:15px}
+  header h1{display:none}
+}
+@media (max-width:860px){
   .work{grid-template-columns:1fr;height:auto}
   .board{height:62vh}
+  #tab-sheet .board{height:auto}
+  #tab-sheet .cvwrap{height:78vh;min-height:420px}
+  #tab-sheet .side{position:static;height:auto}
   .side{border-left:none;border-top:1px solid var(--line)}
+}
+@media (max-width:600px){
+  #tab-test .board{height:auto;flex-direction:row;flex-wrap:wrap;align-content:flex-start;gap:6px;padding:8px}
+  #tab-test .board .floatbtn{position:static;order:0;flex:1 1 0;font-size:13px;padding:8px 6px}
+  #tab-test .board .tip{position:static;order:1;flex:1 1 100%;max-width:none;font-size:12.5px}
+  #tab-test .board canvas{order:2;flex:1 1 100%;height:54vh;min-height:330px}
+  #aimDone2{right:16px !important;bottom:16px !important}
+}
+@media (max-width:600px){
+  .mhide{display:none}
+  #tab-sheet .boardbar{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #tab-sheet .boardbar .btn{padding:9px 2px;font-size:12.5px;margin:0 !important;white-space:nowrap}
+  #tab-sheet .boardbar #sOverride{grid-column:span 2}
+  #tab-sheet .cvwrap{height:72vh;min-height:430px}
+  /* 휴대폰: 순·시 안내를 과녁 위가 아니라 과녁 위쪽 바깥 한 줄로 */
+  #tab-sheet .cvwrap{flex-direction:column}
+  #tipSheet{position:static !important;order:-1;max-width:none !important;margin:0 0 6px;padding:6px 8px;display:flex;align-items:center;gap:8px;border-radius:10px}
+  #tipSheet .st-head{flex:1;min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+  #tipSheet .st-act{display:flex;flex-direction:column}
+  #tipSheet .rs{font-size:18px;margin-right:0}
+  #tipSheet .rs-act{font-size:17px;margin-top:0}
+  #tipSheet .rs-sm{font-size:10.5px}
+  #tipSheet .aw{flex:none;margin-top:0;padding:3px 6px 3px 3px;gap:5px;max-width:52%}
+  #tipSheet .aw-ic{width:32px;height:32px}
+  #tipSheet .aw-t b{font-size:12.5px}
+  #tipSheet .aw-s{font-size:10px}
+  #tipSheet .rs-note{display:none}
 }
 </style>
 </head>
@@ -144,48 +253,54 @@ textarea{font:12px ui-monospace,Menlo,monospace}
 <header>
   <h1>국궁 <span>145m</span></h1>
   <nav class="tabs">
-    <button data-tab="test" class="on"><span class="n">1</span><span class="t">시사 </span>5발</button>
-    <button data-tab="sheet"><span class="n">2</span>시지</button>
-    <button data-tab="env"><span class="n">3</span><span class="t">환경 </span>3D</button>
+    <button data-tab="test" class="on"><span class="n">1</span>표잡기</button>
+    <button data-tab="sheet"><span class="n">2</span>습사</button>
+    <button data-tab="env"><span class="n">3</span>현재바람<span class="t">상태</span></button>
   </nav>
+  <button class="gear" id="calBtn" aria-label="기록 달력" title="기록 달력">📅</button>
   <button class="gear" id="gearBtn" aria-label="설정">⚙</button>
 </header>
 
 <!-- ① 시사 5발 -->
 <section class="tab on" id="tab-test">
   <div class="work">
-    <div class="board"><canvas id="cvTest"></canvas><div class="tip" id="tipTest"></div></div>
+    <div class="board"><canvas id="cvTest"></canvas><div class="tip" id="tipTest"></div><div class="devask" id="devAsk" hidden></div><button class="btn floatbtn" id="persTog2">⚙ 개인 기준</button><button class="btn floatbtn" id="guideTog2" style="top:68px">〰 바람 안내선</button><button class="btn red" id="aimDone2" style="position:absolute;right:24px;bottom:24px;z-index:5;font-weight:700;font-size:15px;padding:11px 18px;box-shadow:0 4px 12px rgba(0,0,0,.18)">✓ 겨냥설정완료</button></div>
     <aside class="side">
       <h2>시사 5발로 표 잡기</h2>
       <div class="card" id="aimPickCard">
         <div style="display:flex;justify-content:space-between;align-items:center"><div class="lab"><b style="color:var(--ink)">1단계</b> · 오늘 기압과 겨냥점</div><span class="badge calm" id="aimState"></span></div>
+        <div class="stepdesc" id="step1Desc">오늘의 <b>기압</b>과 <b>바람</b>을 선택하여 표를 정하세요. 정한 뒤 <b>겨냥설정완료</b>를 누르면 시사를 시작할 수 있습니다.</div>
         <div id="aimPresets">
+          <div class="slider" style="grid-template-columns:96px 1fr 96px;margin-top:8px"><span>평기압 겨냥선</span><input id="pBase" type="range" min="0" max="4.2" step="0.05"><output id="pBaseO"></output></div>
+          <div class="note" id="pBaseN" style="margin:0 0 4px 104px;font-size:11px"></div>
           <div class="pbar"><span>저기압</span><div class="ptrack"><div class="pfill" id="pFill"></div></div><span>고기압</span></div>
           <div class="slider"><span>기압</span><input id="tP" type="range" min="960" max="1050" step="1"><output id="tPO"></output></div>
+          <div class="psign" id="pSign"></div>
+          <div class="pchips" id="pChips"><span>날씨앱이 없으면 하늘을 보고:</span><button data-sky="1030">☀️ 쾌청</button><button data-sky="1022">🌤 화창</button><button data-sky="1013">⛅ 구름 조금</button><button data-sky="1004">☁️ 흐림</button><button data-sky="994">🌧 비</button></div>
           <div class="wlab"><span>← 왼쪽에서 부는 바람</span><span>오른쪽에서 부는 바람 →</span></div>
           <div class="slider"><span>좌우 바람</span><input id="tWz" type="range" min="-8" max="8" step="0.1"><output id="tWzO"></output></div>
+          <div class="psign" id="wzSign"></div>
           <div class="wlab"><span>← 맞바람</span><span>순풍 →</span></div>
           <div class="slider"><span>앞뒤 바람</span><input id="tWx" type="range" min="-8" max="8" step="0.1"><output id="tWxO"></output></div>
+          <div class="psign" id="wxSign"></div>
+          <details class="wguide"><summary>바람 세기 보는 법 (m/s별 징후)</summary><div id="wGuide"></div></details>
           <div class="pinfo" id="pInfo"></div>
-          <div class="lab" style="margin-top:8px">그림에서 찍거나 미세 조정할 때 위아래 차이는</div>
-          <div class="seg" style="grid-template-columns:1fr 1fr;margin-top:4px" id="vMode"><button data-vm="wind">앞뒤 바람으로</button><button data-vm="pressure">기압으로</button></div>
-          <button class="perstog" id="persTog">⚙ 개인 기준 설정 (평기압 겨냥선 · 바람 편차) ▾</button>
-          <div class="pers" id="persBox" hidden>
-            <div class="slider"><span>평기압 겨냥선</span><input id="pBase" type="range" min="0" max="4.2" step="0.05"><output id="pBaseO"></output></div>
-            <div class="note" id="pBaseN" style="margin:2px 0 6px"></div>
-            <div class="slider"><span>기압 편차</span><input id="pKp" type="range" min="1" max="20" step="0.1"><output id="pKpO"></output></div>
-            <div class="slider"><span>좌우 편차</span><input id="pKz" type="range" min="5" max="50" step="1"><output id="pKzO"></output></div>
-            <div class="slider"><span>앞뒤 편차</span><input id="pKx" type="range" min="5" max="50" step="1"><output id="pKxO"></output></div>
-            <div class="note" style="margin-top:4px">기압 편차 = 1 hPa당, 바람 편차 = 1 m/s당 겨냥점이 움직이는 거리. <span id="persDefTxt"></span></div>
-            <div class="actions" style="margin-top:6px"><button class="btn pri" id="persSave">지금 값을 기본값으로 저장</button><button class="btn" id="persReset">기본값으로</button></div>
-          </div>
+          <div class="persinfo" style="margin-top:10px">기압·바람 슬라이더대로 옮겨진 표가 <b>심하게 맞지 않을 때</b> 아래 <b>⚙ 개인 기준 설정</b>을 열어 내 기준으로 조정하세요.
+    <ul>
+      <li><b>기압 편차</b>: 고기압·저기압일 때 표가 위아래로 너무 많이(적게) 움직이면 줄이세요(늘리세요).</li>
+      <li><b>좌우 편차</b>: 옆바람에 맞춰 옮긴 표로 쏴도 화살이 계속 바람 쪽으로 밀리면 늘리고, 반대쪽으로 넘어가면 줄이세요.</li>
+      <li><b>앞뒤 편차</b>: 맞바람·순풍에 맞춰 옮긴 표가 계속 짧거나 길면 늘리고, 넘치면 줄이세요.</li>
+    </ul>
+    과녁 그림의 겨냥점과 바람 안내선 간격이 바로 바뀌니, 보면서 맞추면 됩니다. 설정 창에서 맞는 값을 찾으면 "지금 값을 기본값으로 저장"을 눌러 두세요.</div>
+          <button class="perstog" id="persTog" style="margin-top:4px">⚙ 개인 기준 설정 (기압·바람 편차) ▾</button>
         </div>
         <div id="aimPickText" style="font-size:16px;font-weight:700;margin:6px 0 2px"></div>
-        <div class="nudge" id="aimNudge"><span class="lab">미세 조정 10 cm</span><button data-d="u">↑</button><button data-d="d">↓</button><button data-d="l">←</button><button data-d="r">→</button></div>
+        <div class="nudge" id="aimNudge" hidden style="display:none!important"><span class="lab">미세 조정 10 cm</span><button data-d="u">↑</button><button data-d="d">↓</button><button data-d="l">←</button><button data-d="r">→</button></div>
         <div class="actions"><button class="btn" id="tAimAuto">자동 겨냥점으로 (기압·바람)</button><button class="btn" id="tAimMode">그림에서 직접 찍기</button><button class="btn warn" id="tAimReset">겨냥점 초기화</button><button class="btn pri" id="aimDone">이 지점으로 확정</button></div>
       </div>
       <div class="card" id="shotCard">
-        <div class="lab"><b style="color:var(--ink)">2단계</b> · 과녁 그림에서 화살이 맞은 자리를 차례로 누르세요</div>
+        <div class="lab"><b style="color:var(--ink)">2단계</b> · 5발 탄착군 만들기</div>
+        <div class="stepdesc">설정한 표에 <b>다섯 발을 동일하게</b> 쏘고, 과녁 그림에서 <b>맞은 자리</b>를 차례로 표시하세요.</div>
         <div class="chips" id="chips"></div>
         <div class="actions">
           <button class="btn" id="tUndo">마지막 화살 지우기</button>
@@ -193,8 +308,14 @@ textarea{font:12px ui-monospace,Menlo,monospace}
           <button class="btn" id="tReset">시사 다시</button>
         </div>
       </div>
+      <div class="skipbox" style="margin:-4px 2px 12px;border-top:none;padding-top:0"><span>5발 탄착군 없이 시작하려면</span><button class="btn" id="tSkip">건너뛰고 바로 습사 진행 →</button></div>
+      <div class="card">
+        <div class="lab"><b style="color:var(--ink)">3단계</b> · 습사 시작</div>
+        <div class="stepdesc">과녁 그림에 <b>새 표</b>로 표시된 자리로 표를 옮겨서 습사를 시작하세요. <span style="color:var(--ink2)">(오른쪽 위 <b>2 습사</b> 탭 선택)</span></div>
+        <div class="actions" style="margin-top:6px"><button class="btn" id="goSheet2">2 습사로 가기 →</button></div>
+      </div>
       <div id="testRes"></div>
-      <div class="note">평기압(1013 hPa)·무풍 겨냥점은 기본이 과녁 상단 1/4 지점이고, 사람마다 다르면 "개인 기준 설정"에서 바꿀 수 있습니다. 바람 슬라이더를 움직이면 슬라이더를 민 쪽으로 겨냥점이 옮겨집니다(바람이 불어오는 쪽을 겨냥). 좌우는 과녁 끝(한가운데에서 1 m) 겨냥이 5 m/s, 앞뒤는 바람 1 m/s당 표 25 cm(순풍은 아래, 맞바람은 위)가 기준입니다. 기압을 맞추면 겨냥점이 자동으로 위아래로 옮겨집니다: 고기압이면 화살이 덜 나가니 위로, 저기압이면 붕 떠서 더 나가니 아래로. 기압 편차는 1023 hPa에서 과녁 윗변(1 hPa당 약 6.7 cm)을 기준으로 잡았고, ⚙ 설정에서 기준을 고칠 수 있습니다. 미세 조정이나 직접 찍기도 됩니다. 이후 안내는 모두 "오늘 겨냥 지점에서 몇 cm"로 나옵니다.</div>
+      <div class="note">평기압(1013 hPa)·무풍 겨냥점은 기본이 과녁 상단 1/4 지점이고, 사람마다 다르면 위의 "평기압 겨냥선" 슬라이더로 바꿀 수 있습니다. 바람 슬라이더를 움직이면 슬라이더를 민 쪽으로 겨냥점이 옮겨집니다(바람이 불어오는 쪽을 겨냥). 좌우는 과녁 끝(한가운데에서 1 m) 겨냥이 5 m/s, 앞뒤는 바람 1 m/s당 표 25 cm(순풍은 아래, 맞바람은 위)가 기준입니다. 기압을 맞추면 겨냥점이 자동으로 위아래로 옮겨집니다: 고기압이면 화살이 덜 나가니 위로, 저기압이면 붕 떠서 더 나가니 아래로. 평기압(1007~1019 hPa)일 때는 평기압 겨냥선 그대로이고, 그 범위를 벗어난 만큼만 기압 편차(기본 1 hPa당 6.7 cm)로 옮기며, ⚙ 설정에서 기준을 고칠 수 있습니다. 미세 조정이나 직접 찍기도 됩니다. 이후 안내는 모두 "오늘 겨냥 지점에서 몇 cm"로 나옵니다.</div>
     </aside>
   </div>
 </section>
@@ -202,17 +323,24 @@ textarea{font:12px ui-monospace,Menlo,monospace}
 <!-- ② 시지 -->
 <section class="tab" id="tab-sheet">
   <div class="work">
-    <div class="board"><canvas id="cvSheet"></canvas><div class="tip" id="tipSheet"></div></div>
-    <aside class="side">
-      <div class="card aimcard" id="aimCard"></div>
-      <div class="actions" style="margin-top:0;margin-bottom:12px">
-        <button class="btn" id="sMiss">불 (위치 모름)</button>
-        <button class="btn" id="sUndo">되돌리기</button>
-        <button class="btn" id="sOverride">겨냥 지점 직접 찍기</button>
+    <div class="board">
+      <div class="boardbar">
+        <button class="btn bb-main" id="sOverride">🎯 <span class="mhide">겨냥 지점 </span>직접 찍기</button>
         <button class="btn" id="sBad">잘못쏨</button>
+        <button class="btn" id="sMiss">위치모름</button>
+        <button class="btn" id="sUndo">↶ 되돌리기</button>
+        <button class="btn" id="prevTog" style="margin-left:auto">이전 화살 표시</button>
+        <button class="btn" id="guideTog3">〰 <span class="mhide">바람 </span>안내선</button>
+        <button class="btn" id="persTog3">⚙ 개인 기준</button>
       </div>
-      <div class="card" id="windCard"></div>
-      <button class="btn pri" id="sSave" style="width:100%;margin-bottom:8px">🖼 시지 이미지로 저장</button>
+      <div class="cvwrap" style="position:relative;display:flex"><canvas id="cvSheet"></canvas><div class="tip" id="tipSheet" style="left:12px;top:10px"></div></div>
+      <div class="boardbar" style="margin:8px 0 0;align-items:center"><button class="btn" id="kToggle">이동 폭 자동 보정</button><span class="note" id="kState" style="margin:0"></span></div>
+      <div class="card" id="windCard" style="margin:8px 0 0;padding:8px 12px"></div>
+    </div>
+    <aside class="side">
+      <div class="card aimcard" id="aimCard" style="display:none"></div>
+      <div class="card" id="kCard"></div>
+      <div style="display:flex;gap:6px;margin-bottom:8px"><button class="btn pri" id="sLog" style="flex:1">📅 오늘 습사 저장</button><button class="btn pri" id="sSave" style="flex:1">🖼 시지 이미지로 저장</button></div>
       <table class="sheet" id="sheetTbl"></table>
       <div class="note" id="sheetSum"></div>
       <div class="card" style="margin-top:12px">
@@ -235,9 +363,20 @@ textarea{font:12px ui-monospace,Menlo,monospace}
     </div>
     <div class="envhud" id="envHud"></div>
     <div class="legend" id="legend"></div>
+    <div class="envstory" id="envStory"></div>
     <div id="no3d" hidden style="position:absolute;inset:0;display:grid;place-items:center;background:#e9e4d8;z-index:3;text-align:center;padding:24px;font-size:15px;line-height:1.7">3D 화면을 불러오지 못했습니다.<br>인터넷이 연결된 곳에서 한 번 열어 두면, 그다음부터는 오프라인에서도 보입니다.<br><span style="font-size:13px;color:#5b544a">시사·시지 기능은 그대로 쓸 수 있습니다.</span></div>
   </div>
 </section>
+
+<div class="pers persfloat" id="persBox" hidden>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><b style="font-size:14px">⚙ 개인 기준 설정</b><span class="note" id="persNow" style="margin:0;flex:1"></span><button class="btn" id="persClose" style="padding:4px 10px">닫기</button></div>
+            <div class="slider"><span>기압 편차</span><input id="pKp" type="range" min="1" max="60" step="0.5"><output id="pKpO"></output></div>
+            <div class="slider"><span>좌우 편차</span><input id="pKz" type="range" min="5" max="50" step="1"><output id="pKzO"></output></div>
+            <div class="slider"><span>앞뒤 편차</span><input id="pKx" type="range" min="5" max="50" step="1"><output id="pKxO"></output></div>
+            <div class="note" style="margin-top:4px">기압 편차 = 1 hPa당, 바람 편차 = 1 m/s당 겨냥점이 움직이는 거리. <span id="persDefTxt"></span></div>
+            <div class="actions" style="margin-top:6px"><button class="btn pri" id="persSave">지금 값을 기본값으로 저장</button><button class="btn" id="persReset">기본값으로</button></div>
+  <div class="note" id="persAim" style="margin-top:4px;font-weight:600;color:var(--ink)"></div>
+</div>
 
 <!-- 시지 이미지 -->
 <div class="drawer" id="imgModal" hidden style="justify-content:center;align-items:center">
@@ -246,6 +385,18 @@ textarea{font:12px ui-monospace,Menlo,monospace}
     <img id="imgPrev" alt="시지 이미지" style="width:100%;border-radius:8px;border:1px solid var(--line);-webkit-touch-callout:default">
     <div class="actions" style="justify-content:center"><button class="btn red" id="imgSave">앨범 / 파일로 저장</button></div>
     <div class="note" id="imgMsg" style="text-align:left">아이폰·아이패드: <b>위 이미지를 길게 누르고 "사진 앱에 저장"</b>을 고르면 바로 앨범에 들어갑니다. "앨범 / 파일로 저장"을 누르면 공유 창이 열리니 <b>"이미지 저장"</b>을 고르면 앨범에 들어갑니다. 공유 창이 없는 컴퓨터에서는 파일로 내려받습니다.</div>
+  </div>
+</div>
+
+<!-- 기록 달력 -->
+<div class="drawer" id="calModal" hidden style="justify-content:center;align-items:center">
+  <div class="pane" style="width:min(640px,96%);height:auto;max-height:94%;border-radius:12px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><b style="font-family:'Noto Serif KR',serif;font-size:17px;flex:1">📅 습사 기록 달력</b><button class="btn" id="calClose">닫기</button></div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px"><button class="btn" id="calPrev">‹</button><b id="calTitle" style="font-size:16px;min-width:120px;text-align:center"></b><button class="btn" id="calNext">›</button></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="note" id="calMonth" style="text-align:center;margin:6px 0 10px"></div>
+    <div id="calDay"></div>
+    <div class="note" style="margin-top:10px">시지를 기록하면 그날 기록이 이 기기에 자동으로 저장되고, "📅 오늘 습사 저장"으로 언제든 다시 저장할 수 있습니다. 날짜가 바뀐 뒤 앱을 열면 지난 기록은 달력에 남고 시지는 새로 시작합니다. 기록은 지금 쓰는 기기·앱에만 저장됩니다.</div>
   </div>
 </div>
 
@@ -490,20 +641,21 @@ const cm = v => Math.round(v * 100);
 // ================= 상태 =================
 const NR = 9, NA = 5;
 const blankRounds = () => Array.from({ length: NR }, () => [null, null, null, null, null]);
+const localDate = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 function freshS(){
   return { v: 2, v0: SPEC.v0Est, v0Src: 'est', pressure: 1013, tempC: 15, gain: 'mid',
-    date: new Date().toISOString().slice(0, 10), place: '',
+    date: localDate(), place: '',
     cal: { p: 1023, aboveTopCm: 0 }, calPv: 1, wind0: { x: 0, z: 0 }, test: { aim: { z: 0, y: TH * 0.75 }, aimSet: false, aimManual: false, shots: [] }, rounds: blankRounds() };
 }
 let S = freshS();
 try { const s = JSON.parse(localStorage.getItem('gukgung-v2') || 'null'); if (s && s.v === 2 && s.rounds && s.rounds.length === NR) S = Object.assign(freshS(), s); } catch (e) {}
 if (!S.wind0) S.wind0 = { x: 0, z: 0 };
 if (!S.calWind) S.calWind = 5;
-if (!S.vMode) S.vMode = 'wind';
+S.vMode = 'wind';   // 위아래 차이는 앞뒤 바람으로 (선택칸 없앰)
 // 실측: 과녁 끝(한가운데에서 1 m)을 겨냥하면 바람 calWind m/s. 좌우·앞뒤 같은 간격.
 const KW = () => 1 / (S.calWind || 5);   // 좌우: 바람 1 m/s당 겨냥점 이동(m)
 if (!S.calWindX || !S.calXv) { S.calWindX = 4; S.calXv = 1; }
-try { const pd = JSON.parse(localStorage.getItem('gukgung-pers') || 'null'); if (pd && !localStorage.getItem('gukgung-v2')) { S.baseY = pd.baseY; S.calWind = pd.calWind; S.calWindX = pd.calWindX; if (pd.aboveTopCm != null) S.cal.aboveTopCm = pd.aboveTopCm; } } catch (e) {}   // 앞뒤 기본값을 1 m/s당 25 cm로 (이전 저장값 3 m/s/m 대체)
+try { const pd = JSON.parse(localStorage.getItem('gukgung-pers') || 'null'); if (pd && !localStorage.getItem('gukgung-v2')) { S.baseY = pd.baseY; S.calWind = pd.calWind; S.calWindX = pd.calWindX; if (pd.aboveTopCm != null) S.cal.aboveTopCm = pd.aboveTopCm; if (pd.k) S.kBase = pd.k; } } catch (e) {}   // 앞뒤 기본값을 1 m/s당 25 cm로 (이전 저장값 3 m/s/m 대체)
 // 앞뒤 실측: 바람 1 m/s당 표 25 cm (순풍은 아래, 맞바람은 위)
 const KX = () => 1 / (S.calWindX || 4);  // 앞뒤: 바람 1 m/s당 겨냥점 이동(m)
 if (!S.cal) S.cal = { p: 1023, aboveTopCm: 0 };
@@ -541,7 +693,7 @@ function windWords(w){
 // ================= 분석 =================
 // 탄착 쏠림(표 대비 착점 평균) D를 추적한다. 표 = 목표 − D (화살은 표를 옮긴 만큼 옮겨 맞는다).
 const GAINS = { low: 0.2, mid: 0.35, high: 0.55 };
-let A = null, A_R0 = { z: 0, y: 0 };
+let A = null, A_R0 = { z: 0, y: 0 }, A_K = { k: { z: 1, y: 1 }, n: { z: 0, y: 0 }, auto: true };
 function windFactors(){
   // 바람 1 m/s당 과녁에서의 쏠림(m) — 그래프용 근사
   const L = aimToLaunch(S.v0, CY, 0), b = simulate(S.v0, L.theta, L.psi, null);
@@ -551,65 +703,93 @@ function windFactors(){
 function analyze(){
   setAtmosphere(S.pressure, S.tempC);
   const T = { z: 0, y: CY };
-  let D = { z: 0, y: 0 }, sd = { z: 0.3, y: 0.4 }, test = null;
-  // 시사 기록이 없으면 '오늘 겨냥 지점 그대로' 쏘는 것에서 시작
-  D = { z: T.z - S.test.aim.z, y: T.y - S.test.aim.y };
+  // 모델(축마다): 착점 = c + k × 겨냥.  c = 바람 등 그날 상태, k = 이동 폭 배율(표 1 cm → 착점 k cm)
+  const auto = S.kAuto !== false;
+  const kb = S.kBase || { z: 1, y: 1 };
+  let k = auto ? { z: kb.z, y: kb.y } : { z: 1, y: 1 };
+  const AX = ['z', 'y'];
+  const cFor = aim => ({ z: T.z - k.z * aim.z, y: T.y - k.y * aim.y });   // 이 겨냥으로 홍심에 맞는 상태
+  const recOf = () => ({ z: (T.z - c.z) / k.z, y: (T.y - c.y) / k.y });
+  let c = cFor(S.test.aim), sd = { z: 0.3, y: 0.4 }, test = null;
   const ts = S.test.shots.filter(p => !p.bad);   // 잘못쏨은 계산에서 뺀다
   if (ts.length) {
     const off = ts.map(p => ({ z: p.z - S.test.aim.z, y: p.y - S.test.aim.y }));
-    D = { z: avg(off.map(o => o.z)), y: avg(off.map(o => o.y)) };
+    const center = { z: avg(ts.map(p => p.z)), y: avg(ts.map(p => p.y)) };
+    c = { z: center.z - k.z * S.test.aim.z, y: center.y - k.y * S.test.aim.y };
     if (ts.length >= 3) sd = { z: Math.max(0.08, std(off.map(o => o.z))), y: Math.max(0.1, std(off.map(o => o.y))) };
-    test = { n: ts.length, nBad: S.test.shots.length - ts.length, center: { z: avg(ts.map(p => p.z)), y: avg(ts.map(p => p.y)) }, D: { ...D }, sd: { ...sd }, rec: { z: T.z - D.z, y: T.y - D.y } };
+    const r0 = recOf();
+    test = { n: ts.length, nBad: S.test.shots.length - ts.length, center, D: { z: T.z - r0.z, y: T.y - r0.y }, sd: { ...sd }, rec: r0 };
   }
-  const g0 = GAINS[S.gain] || 0.35, hist = [], series = [{ label: '시사', D: { ...D } }];
-  let prevE = null, next = null, lastRec = null;
+  const Dof = () => { const r = recOf(); return { z: T.z - r.z, y: T.y - r.y }; };
+  const g0 = GAINS[S.gain] || 0.35, hist = [], series = [{ label: '시사', D: Dof() }];
+  let prevE = null, next = null, lastRec = null, prevGood = test ? { aim: { ...S.test.aim }, p: { ...test.center }, changed: false } : null, kN = { z: 0, y: 0 };   // 시사 탄착군 중심도 이동 폭 학습의 출발점
   const resetIdx = S.resetIdx == null ? null : S.resetIdx;   // 겨냥점 초기화 시점 (그 뒤부터 새로 추적)
+  const kReset = S.kResetIdx == null ? -2 : S.kResetIdx;     // 이동 폭 학습 시작점
   let resetDone = resetIdx == null;
   const shifts = (S.shifts || []).map(s => ({ ...s, done: false }));   // 슬라이더로 옮긴 겨냥 (그 시점 이후 표에 반영)
+  const applyShift = sh => { c = { z: c.z - k.z * sh.dz, y: c.y - k.y * sh.dy }; sh.done = true; };
   for (let r = 0; r < NR; r++) for (let a = 0; a < NA; a++) {
-    if (!resetDone && r * NA + a > resetIdx) { D = { z: T.z - S.test.aim.z, y: T.y - S.test.aim.y }; prevE = null; resetDone = true; }
-    shifts.forEach(sh => { if (!sh.done && sh.idx < r * NA + a) { D = { z: D.z - sh.dz, y: D.y - sh.dy }; sh.done = true; } });
-    const p = S.rounds[r][a], rec = { z: T.z - D.z, y: T.y - D.y };
+    const idx = r * NA + a;
+    if (!resetDone && idx > resetIdx) { c = cFor(S.test.aim); prevE = null; prevGood = null; resetDone = true; }
+    shifts.forEach(sh => { if (!sh.done && sh.idx < idx) applyShift(sh); });
+    const p = S.rounds[r][a], rec = recOf();
     if (!isRec(p)) { if (!next) next = { r, a, rec }; continue; }
     const aim = p.aim || rec;
     if (!hasImp(p) || p.bad) { hist.push({ r, a, rec, aim, miss: true, bad: !!p.bad }); continue; }
-    const e = { z: (p.z - aim.z) - D.z, y: (p.y - aim.y) - D.y };
-    let changed = false;
-    if (prevE) for (const k of ['z', 'y']) {
-      const thr = 1.3 * sd[k];
-      if (Math.abs(e[k]) > thr && Math.abs(prevE[k]) > thr && Math.sign(e[k]) === Math.sign(prevE[k])) changed = true;
+    // 이동 폭 학습: 직전 화살과 표를 충분히 옮겼는데 착점이 다른 폭으로 움직였다면 배율을 조금씩 고친다
+    const kUpd = {};
+    if (auto && prevGood && idx > kReset && !prevGood.changed) for (const ax of AX) {
+      const da = aim[ax] - prevGood.aim[ax], need = Math.max(0.2, 1.2 * sd[ax]);
+      if (Math.abs(da) < need) continue;
+      const kobs = clamp((p[ax] - prevGood.p[ax]) / da, 0.6, 1.8);
+      const gk = 0.2 * Math.min(1, Math.abs(da) / (3 * sd[ax]));
+      const predPrev = c[ax] + k[ax] * prevGood.aim[ax];
+      k[ax] = clamp(k[ax] + gk * (kobs - k[ax]), 0.6, 1.8);
+      c[ax] = predPrev - k[ax] * prevGood.aim[ax];   // 직전 예측은 그대로 두고 배율만 바꾼다
+      kUpd[ax] = true; kN[ax]++;
     }
-    // 사수가 제시된 표 대신 스스로 표를 옮겨 쏘았고(바람 변화 예상) 홍심 근처에 맞았다면,
-    // 그 판단이 맞은 것이므로 그 표를 그대로 다음 표로 삼는다.
-    const own = Math.hypot(aim.z - rec.z, aim.y - rec.y) > 0.03;
+    const e = { z: p.z - (c.z + k.z * aim.z), y: p.y - (c.y + k.y * aim.y) };
+    let changed = false;
+    if (prevE) for (const ax of AX) {
+      const thr = 1.3 * sd[ax];
+      if (Math.abs(e[ax]) > thr && Math.abs(prevE[ax]) > thr && Math.sign(e[ax]) === Math.sign(prevE[ax])) changed = true;
+    }
+    // 사수가 스스로 표를 옮겨 쏜 화살은 그 화살을 기준으로 삼는다(빗나간 만큼만 보정)
+    // 직접 옮긴 표: 버튼으로 표시된 화살만 (계산 방식이 바뀌어도 예전 화살이 잘못 '직접 옮김'으로 잡히지 않게)
+    const own = !!p.own;
     const near = Math.abs(p.z - T.z) <= Math.max(0.15, 1.3 * sd.z) && Math.abs(p.y - T.y) <= Math.max(0.15, 1.3 * sd.y);
     const trust = own && near;
-    // 직접 옮긴 표는 사수가 바람 변화를 읽고 쏜 것이므로 그 화살을 기준으로 삼는다(빗나간 만큼만 보정)
-    const g = own ? 1 : changed ? 0.75 : g0;
-    D = { z: D.z + g * e.z, y: D.y + g * e.y };
-    hist.push({ r, a, rec, aim, e, changed, own, trust, d: { z: p.z - aim.z, y: p.y - aim.y }, D: { ...D } });
-    series.push({ label: `${r+1}-${a+1}`, D: { ...D }, changed });
+    // 한 발이라도 내 흩어짐보다 크게(2배 넘게) 벗어나면 기다리지 않고 표를 더 크게 옮긴다
+    const bigMiss = AX.some(ax => Math.abs(e[ax]) > 2 * sd[ax]);
+    const g = own ? 1 : changed ? 0.75 : bigMiss ? Math.max(g0, 0.6) : g0;
+    c = { z: c.z + g * e.z, y: c.y + g * e.y };
+    const D = Dof();
+    hist.push({ r, a, rec, aim, e, g, bigMiss, changed, own, trust, kUpd, k: { ...k }, d: { z: p.z - aim.z, y: p.y - aim.y }, D });
+    series.push({ label: `${r+1}-${a+1}`, D, changed });
     prevE = changed || own ? null : e;
+    prevGood = { aim, p, changed };
     lastRec = { r, a };
   }
-  if (!resetDone) { D = { z: T.z - S.test.aim.z, y: T.y - S.test.aim.y }; }
-  else shifts.forEach(sh => { if (!sh.done) { D = { z: D.z - sh.dz, y: D.y - sh.dy }; sh.done = true; } });
-  const recNow = { z: T.z - D.z, y: T.y - D.y };
+  if (!resetDone) c = cFor(S.test.aim);
+  else shifts.forEach(sh => { if (!sh.done) applyShift(sh); });
+  const recNow = recOf(), D = Dof();
   // 안전지대: 최근 5발이 비슷한 곳에 모였으면(바람 안정), 어디를 겨냥해도 관중·홍심이 되는 범위를 낸다
   let safe = null;
   const last5 = hist.filter(h => !h.miss && (resetIdx == null || h.r * NA + h.a > resetIdx)).slice(-5);
   if (last5.length === 5 && !last5.some(h => h.changed)) {
     const sz = std(last5.map(h => h.d.z)), sy = std(last5.map(h => h.d.y));
     if (sz <= 0.2 && sy <= 0.25) {
-      const k = 1.5, ez = Math.max(0.06, sz) * k, ey = Math.max(0.08, sy) * k;
-      const rect = { z0: -TW/2 + ez - D.z, z1: TW/2 - ez - D.z, y0: ey - D.y, y1: TH - ey - D.y };   // 관중 안전지대(겨냥 범위)
-      const rr = FACE.r - Math.max(ez, ey);                                                          // 홍심 안전지대 반지름
+      const m = 1.5, ez = Math.max(0.06, sz) * m, ey = Math.max(0.08, sy) * m;
+      const rect = { z0: (-TW/2 + ez - c.z) / k.z, z1: (TW/2 - ez - c.z) / k.z, y0: (ey - c.y) / k.y, y1: (TH - ey - c.y) / k.y };
+      const rr = (FACE.r - Math.max(ez, ey)) / Math.max(k.z, k.y);
       safe = { sz, sy, rect: rect.z1 > rect.z0 && rect.y1 > rect.y0 ? rect : null, r: rr > 0.02 ? rr : 0, c: { ...recNow } };
     }
   }
+  A_K = { k: { ...k }, n: kN, auto };
   const wy = 0; // 기압 효과는 겨냥점에 이미 반영했으므로 상하 기류를 따로 더하지 않음
   // 오늘 겨냥점으로 쏘면 한가운데에 맞는다고 보고, 그것과의 차이만 바람으로 본다
-  const R0 = { z: D.z - (T.z - S.test.aim.z), y: D.y - (T.y - S.test.aim.y) };
+  // 표가 옮겨진 만큼 × 이동 폭 배율 = 착점 기준 쏠림
+  const R0 = { z: (D.z - (T.z - S.test.aim.z)) * k.z, y: (D.y - (T.y - S.test.aim.y)) * k.y };
   // 기압 효과는 겨냥점에 이미 들어 있으므로, 바람 환산은 표준 대기에서 한다
   const wind = { x: R0.y / KX(), y: 0, z: R0.z / KW() };   // 실측 간격으로 환산
   // 겨냥점은 슬라이더 바람을 이미 보정했으므로, 실제 바람 = 슬라이더 바람 + 착점으로 본 차이
@@ -645,6 +825,21 @@ function aimMark(g, x, y, label, col){
   g.fillStyle = col; g.beginPath(); g.arc(x, y, 3.5, 0, Math.PI*2); g.fill();
   if (label) { g.font = '800 14px Noto Sans KR'; g.lineWidth = 4; g.strokeStyle = 'rgba(255,255,255,.9)'; g.strokeText(label, x + 22, y - 18); g.fillText(label, x + 22, y - 18); }
 }
+// 직접 고른 겨냥점: 파란 마름모 + 깃대 (추천겨냥점의 빨간 십자 조준경과 모양·색이 모두 다르게)
+function pickMark(g, x, y, label){
+  const col = '#1f5fbf';
+  const dia = () => { g.beginPath(); g.moveTo(x, y - 13); g.lineTo(x + 13, y); g.lineTo(x, y + 13); g.lineTo(x - 13, y); g.closePath(); };
+  g.save();
+  g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 6; g.beginPath(); g.moveTo(x, y - 13); g.lineTo(x, y - 44); g.stroke();
+  g.strokeStyle = col; g.lineWidth = 2.5; g.beginPath(); g.moveTo(x, y - 13); g.lineTo(x, y - 44); g.stroke();
+  g.fillStyle = col; g.beginPath(); g.moveTo(x, y - 44); g.lineTo(x + 20, y - 38); g.lineTo(x, y - 31); g.closePath(); g.fill();   // 깃발
+  g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 6; dia(); g.stroke();
+  g.fillStyle = 'rgba(31,95,191,.25)'; dia(); g.fill();
+  g.strokeStyle = col; g.lineWidth = 3; dia(); g.stroke();
+  g.fillStyle = col; g.beginPath(); g.arc(x, y, 3.5, 0, Math.PI * 2); g.fill();
+  if (label) { g.font = '800 14px Noto Sans KR'; g.lineWidth = 4; g.strokeStyle = 'rgba(255,255,255,.9)'; g.strokeText(label, x + 24, y - 30); g.fillStyle = col; g.fillText(label, x + 24, y - 30); }
+  g.restore();
+}
 function arrowLine(g, x1, y1, x2, y2, col){
   const L = Math.hypot(x2 - x1, y2 - y1); if (L < 14) return;
   const ux = (x2 - x1) / L, uy = (y2 - y1) / L, ex = x2 - ux * 18, ey = y2 - uy * 18;
@@ -661,14 +856,23 @@ function prep(cv, pts){
   const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
   let zmin = -2.4, zmax = 2.4, ymin = -0.9, ymax = TH + (cv.id === 'cvTest' && !S.test.aimSet ? 2.0 : 0.9);
   pts.filter(Boolean).forEach(p => { zmin = Math.min(zmin, p.z - 0.45); zmax = Math.max(zmax, p.z + 0.45); ymin = Math.min(ymin, p.y - 0.5); ymax = Math.max(ymax, p.y + 0.5); });
-  const s = Math.min(w / (zmax - zmin), h / (ymax - ymin)), cz = (zmin + zmax) / 2, cyv = (ymin + ymax) / 2;
-  const X = z => w/2 + (z - cz) * s, Y = y => h/2 - (y - cyv) * s;
+  // 개인 기준 설정 창이 과녁 위에 떠 있으면, 가려지지 않는 쪽에 과녁을 그린다
+  let fw = w, fh = h;
+  const pb = document.getElementById('persBox');
+  if (pb && !pb.hidden && pb.parentNode && pb.parentNode.contains(cv)) {
+    const o = pb.getBoundingClientRect(), cr = cv.getBoundingClientRect();
+    if (o.left > cr.left + cr.width * 0.35) fw = Math.max(w * 0.4, o.left - cr.left - 10);
+    else fh = Math.max(h * 0.35, o.top - cr.top - 10);
+  }
+  // 습사 화면은 과녁을 절반 크기로 그려 주변(바람 안내선·빗나간 화살)을 넓게 본다
+  const s = Math.min(fw / (zmax - zmin), fh / (ymax - ymin)) * (cv.id === 'cvSheet' ? (w < 600 ? 0.8 : 0.5) : 1), cz = (zmin + zmax) / 2, cyv = (ymin + ymax) / 2;
+  const X = z => fw/2 + (z - cz) * s, Y = y => fh/2 - (y - cyv) * s;
   g.strokeStyle = 'rgba(31,28,24,.07)'; g.lineWidth = 1;
-  for (let z = Math.ceil((cz - w/2/s) * 2) / 2; z < cz + w/2/s; z += 0.5) { g.beginPath(); g.moveTo(X(z), 0); g.lineTo(X(z), h); g.stroke(); }
-  for (let y = Math.ceil((cyv - h/2/s) * 2) / 2; y < cyv + h/2/s; y += 0.5) { g.beginPath(); g.moveTo(0, Y(y)); g.lineTo(w, Y(y)); g.stroke(); }
+  for (let z = Math.ceil((cz - fw/2/s) * 2) / 2; z < cz + (w - fw/2)/s; z += 0.5) { g.beginPath(); g.moveTo(X(z), 0); g.lineTo(X(z), h); g.stroke(); }
+  for (let y = Math.ceil((cyv - (h - fh/2)/s) * 2) / 2; y < cyv + fh/2/s; y += 0.5) { g.beginPath(); g.moveTo(0, Y(y)); g.lineTo(w, Y(y)); g.stroke(); }
   g.fillStyle = '#9fb48a'; g.fillRect(0, Y(0), w, h - Y(0));
   drawTargetFace(g, X, Y, s);
-  const view = { s, cz, cyv, w, h };
+  const view = { s, cz, cyv, w: fw, h: fh };
   cv._view = view;
   return { g, X, Y, s, w, h };
 }
@@ -677,6 +881,40 @@ function toWorld(cv, ev){
   const z = v.cz + (ev.clientX - r.left - v.w/2) / v.s, y = v.cyv - (ev.clientY - r.top - v.h/2) / v.s;
   return { z: Math.round(z * 100) / 100, y: Math.round(y * 100) / 100 };
 }
+// 바람 안내선: 지금 겨냥점을 중심으로 바람 1 m/s마다 겨냥을 옮길 폭(좌우·앞뒤 편차)을 고리로 보여 준다
+const GUIDE_N = 7;
+if (S.guide == null) S.guide = true;
+const guideOn = () => S.guide && S.test.aimSet;
+// 안내선의 중심(0)은 바람을 뺀 '무풍 기준 표'에 고정: 바람 슬라이더를 움직여도 고리는 그대로이고 겨냥 표시만 칸을 따라 움직인다
+// 안내선 0 = 무풍 기준 표: 좌우는 늘 과녁 한가운데, 높이는 평기압 겨냥선 + 오늘 기압 보정 (편차폭이 바뀌어도 한쪽으로 쏠리지 않게)
+function guideCenter(){ return { z: 0, y: BASE_AIM.y + pressureShift() }; }
+// 안내선 간격 = 바람 1 m/s당 겨냥 이동 폭 (이동 폭 보정 배율로 오차만 고친다)
+const GZ = () => KW() / ((A_K && A_K.k && A_K.k.z) || 1), GX = () => KX() / ((A_K && A_K.k && A_K.k.y) || 1);
+function guidePts(c){ const n = 5; return [{ z: c.z - n * GZ(), y: c.y - n * GX() }, { z: c.z + n * GZ(), y: c.y + n * GX() }]; }
+function drawWindGuide(g, X, Y, s, c, w, h){
+  const cx = X(c.z), cy = Y(c.y), kz = GZ() * s, kx = GX() * s, col = 'rgba(196,30,22,.85)';
+  g.save();
+  g.globalAlpha = 0.38;   // 안내선은 흐리게: 과녁·착점·겨냥 표시가 먼저 보이도록
+  g.strokeStyle = 'rgba(196,30,22,.6)'; g.lineWidth = 2; g.setLineDash([8, 6]);
+  g.beginPath(); g.moveTo(0, cy); g.lineTo(w, cy); g.moveTo(cx, 0); g.lineTo(cx, h); g.stroke();
+  g.strokeStyle = col; g.lineWidth = 1.8; g.setLineDash([2.5, 4]);
+  for (let n = 1; n <= GUIDE_N; n++) { g.beginPath(); g.ellipse(cx, cy, n * kz, n * kx, 0, 0, Math.PI * 2); g.stroke(); }
+  g.setLineDash([]);
+  const badge = (x, y, t) => { g.fillStyle = '#c41e16'; g.beginPath(); g.arc(x, y, 10, 0, Math.PI * 2); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 1.5; g.stroke(); g.fillStyle = '#fff'; g.font = '700 11px Noto Sans KR'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(t, x, y + 0.5); };
+  g.globalAlpha = 0.6;
+  for (let n = GUIDE_N; n >= 1; n--) { badge(cx + n * kz, cy, n); badge(cx, cy - n * kx, n); }
+  badge(cx, cy, 0);
+  g.globalAlpha = 0.75;
+  g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  g.fillStyle = 'rgba(160,20,14,.95)'; g.font = '600 11.5px Noto Sans KR';
+  if (w < 560) g.fillText(`안내선 1칸 = 바람 1 m/s (좌우 ${Math.round(GZ() * 100)} · 앞뒤 ${Math.round(GX() * 100)} cm)`, 8, h - 10); else
+  g.fillText(`안내선 0 = 무풍 기준 표 · 1칸 = 바람 1 m/s (좌우 ${Math.round(GZ() * 100)} cm · 앞뒤 ${Math.round(GX() * 100)} cm${Math.abs(GZ() - KW()) > 0.005 || Math.abs(GX() - KX()) > 0.005 ? ', 이동 폭 보정 반영' : ''}) · 바람 슬라이더는 겨냥 표시만 칸을 따라 옮깁니다`, 8, h - 10);
+  g.restore();
+}
+function toggleGuide(){ S.guide = !S.guide; save(); drawTest(); drawSheet(); syncGuideBtns(); }
+function syncGuideBtns(){ const pt = $('prevTog'); if (pt) { const on = S.showPrev !== false; pt.classList.toggle('on', on); pt.textContent = matchMedia('(max-width:600px)').matches ? (on ? '이전 화살 ●' : '이전 화살 ○') : on ? '이전 화살 표시 켜짐' : '이전 화살 표시 꺼짐'; } ['guideTog2', 'guideTog3'].forEach(id => { const b = $(id); if (b) { b.classList.toggle('on', guideOn()); b.disabled = !S.test.aimSet; b.title = S.test.aimSet ? '' : '겨냥점을 확정하면 쓸 수 있습니다'; } }); }
+$('guideTog2').onclick = toggleGuide; $('guideTog3').onclick = toggleGuide;
+$('prevTog').onclick = () => { S.showPrev = S.showPrev === false; save(); renderSheet(); syncGuideBtns(); };
 function shotDot(g, x, y, col, num, rad){
   rad = rad || 9;
   g.fillStyle = col; g.beginPath(); g.arc(x, y, rad, 0, Math.PI*2); g.fill();
@@ -686,6 +924,7 @@ function shotDot(g, x, y, col, num, rad){
 
 // ================= ① 시사 5발 =================
 let testAimMode = !S.test.aimSet;
+let pickMode = false;   // '그림에서 직접 찍기'를 눌렀을 때만 과녁 그림으로 겨냥점을 바꾼다
 // 평기압(1013 hPa·15°C) 겨냥점 = 과녁 상단 1/4 지점. 오늘 기압·기온으로 공기 밀도가 달라진 만큼 위아래로 옮긴다.
 const DEFAULT_BASE_Y = TH * 0.75;
 // 개인 기본값: '지금 값을 기본값으로 저장'으로 정한 값 (기록과 따로 보관)
@@ -703,7 +942,10 @@ function calInfo(){
   const refY = TH + c.aboveTopCm / 100, dp = (c.p - 1013) || 10;
   return { p: c.p, refY, perHpa: (refY - DEFAULT_BASE_Y) / dp };   // 기울기는 개인 겨냥선과 상관없이 실측 간격 유지
 }
-function pressureShift(){ return calInfo().perHpa * (S.pressure - 1013); }
+// 평기압(1007~1019 hPa)에서는 평기압 겨냥선 그대로. 그 범위를 벗어난 만큼만 기압 편차로 옮긴다.
+const P_LO = 1007, P_HI = 1019;
+function pressureExcess(p){ return p > P_HI ? p - P_HI : p < P_LO ? p - P_LO : 0; }
+function pressureShift(){ return calInfo().perHpa * pressureExcess(S.pressure); }
 // 슬라이더로 넣은 바람만큼 반대쪽으로 겨냥 (표준 대기에서 계산)
 function windShift(){
   // 바람에 밀리는 만큼 바람이 불어오는 쪽으로 겨냥: 맞바람이면 위로, 순풍이면 아래로
@@ -717,7 +959,7 @@ function aimFromPoint(q){
   const wz = clamp(-q.z / k, -8, 8);
   if (S.vMode === 'pressure') {
     const ci = calInfo(), dyNeeded = q.y - BASE_AIM.y - (-KX() * w0.x);
-    S.pressure = clamp(Math.round(1013 + dyNeeded / ci.perHpa), 960, 1050);
+    const ex = dyNeeded / ci.perHpa; S.pressure = clamp(Math.round(ex > 0.5 ? P_HI + ex : ex < -0.5 ? P_LO + ex : 1013), 960, 1050);
     setAtmosphere(S.pressure, S.tempC);
     S.wind0 = { x: w0.x, z: +wz.toFixed(1) };
   } else {
@@ -731,7 +973,8 @@ function aimFromPoint(q){
 }
 document.querySelectorAll('#vMode button').forEach(b => b.onclick = () => { S.vMode = b.dataset.vm; changed(); });
 let persOpen = false;
-$('persTog').onclick = () => { persOpen = !persOpen; renderAimPick(); };
+function togglePers(){ persOpen = !persOpen; renderPers(); requestAnimationFrame(() => { drawTest(); drawSheet(); }); }
+$('persTog').onclick = togglePers; $('persTog2').onclick = togglePers; $('persTog3').onclick = togglePers; $('persClose').onclick = togglePers;
 $('pBase').addEventListener('input', () => { S.baseY = +$('pBase').value; followPressure(); changed(); });
 $('pKz').addEventListener('input', () => { S.calWind = 100 / +$('pKz').value; followPressure(); changed(); });
 // 기압 편차(1 hPa당 cm) → 기준일 겨냥점(윗변 기준 cm)으로 환산해 저장
@@ -740,7 +983,7 @@ $('pKp').addEventListener('input', () => { setPerHpa(+$('pKp').value); followPre
 $('pKx').addEventListener('input', () => { S.calWindX = 100 / +$('pKx').value; followPressure(); changed(); });
 $('persReset').onclick = () => { const d = defP(); S.baseY = d.baseY; S.calWind = d.calWind; S.calWindX = d.calWindX; S.cal.aboveTopCm = d.aboveTopCm != null ? d.aboveTopCm : 0; followPressure(); changed(); };
 $('persSave').onclick = () => {
-  persDef = { baseY: S.baseY, calWind: S.calWind, calWindX: S.calWindX, aboveTopCm: S.cal.aboveTopCm };
+  persDef = { baseY: S.baseY, calWind: S.calWind, calWindX: S.calWindX, aboveTopCm: S.cal.aboveTopCm, k: S.kBase || (persDef && persDef.k) || { z: 1, y: 1 } };
   try { localStorage.setItem('gukgung-pers', JSON.stringify(persDef)); } catch (e) {}
   $('persSave').textContent = '저장했습니다 ✓'; setTimeout(() => { $('persSave').textContent = '지금 값을 기본값으로 저장'; }, 1600);
   renderPers();
@@ -751,7 +994,15 @@ function baseWords(y){
   return d >= 0 ? `윗변 위 ${cm(d)} cm` : `윗변 아래 ${cm(-d)} cm`;
 }
 function renderPers(){
-  $('persBox').hidden = !persOpen; $('persTog').textContent = `⚙ 개인 기준 설정 (평기압 겨냥선 · 바람 편차) ${persOpen ? '▴' : '▾'}`;
+  // 과녁 그림이 보이는 채로 조정하도록 지금 탭의 과녁 위에 띄운다
+  const board = document.querySelector(`#tab-${curTab === 'env' ? 'test' : curTab} .board`);
+  if (persOpen && board && $('persBox').parentNode !== board) board.appendChild($('persBox'));
+  $('persBox').hidden = !persOpen;
+  $('persTog').textContent = `⚙ 개인 기준 설정 (기압·바람 편차) ${persOpen ? '— 과녁 위에 열림' : '열기'}`;
+  [$('persTog2'), $('persTog3')].forEach(b => b && b.classList.toggle('on', persOpen));
+  const w0 = S.wind0 || { x: 0, z: 0 };
+  $('persNow').textContent = `${S.pressure} hPa · 좌우 ${Math.abs(w0.z) < 0.05 ? 0 : (w0.z > 0 ? '왼쪽에서 ' : '오른쪽에서 ') + fmt(Math.abs(w0.z))} · 앞뒤 ${Math.abs(w0.x) < 0.05 ? 0 : (w0.x > 0 ? '순풍 ' : '맞바람 ') + fmt(Math.abs(w0.x))}`;
+  $('persAim').textContent = curTab === 'sheet' && A && A.next ? `지금 표: 오늘 겨냥 지점에서 ${dirWords(A.next.rec.z - S.test.aim.z, A.next.rec.y - S.test.aim.y, false)}` : `오늘 겨냥점: ${baseName()}에서 ${dirWords(S.test.aim.z - BASE_AIM.z, S.test.aim.y - BASE_AIM.y, false)}`;
   $('pBase').value = S.baseY; $('pBaseO').textContent = baseWords(S.baseY);
   $('pBaseN').textContent = `과녁 바닥에서 ${fmt(S.baseY, 2)} m · 평기압·무풍일 때 이 높이를 겨냥하면 홍심에 맞는다는 뜻입니다.`;
   $('pKz').value = Math.round(KW() * 100); $('pKzO').textContent = `${Math.round(KW() * 100)} cm/(m/s)`;
@@ -774,13 +1025,77 @@ function followPressure(){
     const lc = lastRecCell(); (S.shifts = S.shifts || []).push({ idx: lc ? lc.r * NA + lc.a : -1, dz, dy });
   }
 }
+// 날씨앱 없이 하늘 모습으로 기압을 어림하기 (대략적인 경향)
+function skySigns(p){
+  if (p < 995) return '🌧 강한 저기압 징후: 먹구름, 비·눈, 바람이 세고 자주 바뀜';
+  if (p < 1007) return '☁️ 저기압 징후: 구름 많고 흐림, 눅눅함, 곧 비 올 듯';
+  if (p <= 1019) return '⛅ 평기압 징후: 구름 조금, 맑았다 흐렸다';
+  if (p <= 1030) return '🌤 고기압 징후: 구름 거의 없음, 화창, 바람 약함';
+  return '☀️ 강한 고기압 징후: 쾌청·건조, 멀리까지 또렷, 아침저녁 쌀쌀';
+}
+// 바람 세기(m/s)를 눈으로 보는 징후 — 보퍼트 풍력 계급을 활터에 맞춰 줄임
+const WIND_SIGNS = [
+  [0.3, '0', '고요', '연기가 똑바로 올라감, 깃발 축 처짐'],
+  [1.6, '0.3~1.5', '실바람', '연기만 살짝 기울어짐, 깃발은 거의 안 움직임'],
+  [3.4, '1.6~3.3', '남실바람', '얼굴에 바람이 느껴짐, 나뭇잎 살랑, 깃발이 조금 움직임'],
+  [5.5, '3.4~5.4', '산들바람', '나뭇잎·잔가지가 계속 흔들림, 깃발이 펼쳐져 펄럭임'],
+  [8.0, '5.5~7.9', '건들바람', '먼지·종이가 날림, 작은 가지가 흔들림, 깃발이 팽팽'],
+  [999, '8 이상', '흔들바람', '작은 나무 전체가 흔들림, 활 쏘기 매우 어려움']
+];
+function windSign(v){ const s = Math.abs(v); for (const w of WIND_SIGNS) if (s < w[0]) return w; return WIND_SIGNS[WIND_SIGNS.length - 1]; }
 function pClass(p){ return p < 995 ? '강한 저기압' : p < 1007 ? '저기압' : p <= 1019 ? '평기압' : p <= 1030 ? '고기압' : '강한 고기압'; }
+
+// ===== 시사 5발 뒤 편차폭 자동 조정 (바람 기준) =====
+// 1단계에서 맞춘 기압·바람대로 겨냥했는데 탄착군 중심이 홍심을 벗어났다면, 바람 1 m/s당 겨냥 이동 폭(좌우·앞뒤 편차)이 맞지 않았다고 본다.
+// 필요한 바람 보정량 = 지금 겨냥의 바람 몫 − 벗어난 만큼  →  새 편차폭 = 필요한 보정량 ÷ 설정한 바람
+function devProposal(){
+  const t = A.test; if (!t || t.n < 5 || !S.test.aimSet) return null;
+  const T = { z: 0, y: CY }, w = S.wind0 || { x: 0, z: 0 }, aim = S.test.aim;
+  const d = { z: t.center.z - T.z, y: t.center.y - T.y };
+  const wsAct = { z: aim.z, y: aim.y - BASE_AIM.y - pressureShift() };   // 지금 겨냥 중 바람 때문에 옮긴 몫
+  const out = { d, axes: [], skipped: [] };
+  const lim = v => clamp(v, 0.05, 0.50);
+  if (Math.abs(d.z) >= 0.15) {
+    if (Math.abs(w.z) >= 0.5) {
+      const need = wsAct.z - d.z, kNew = lim(-need / w.z), kOld = KW();
+      if (Math.abs(kNew - kOld) >= 0.01) out.axes.push({ ax: 'z', name: '좌우 편차', kOld, kNew });
+    } else out.skipped.push('좌우');
+  }
+  if (Math.abs(d.y) >= 0.2) {
+    if (Math.abs(w.x) >= 0.5) {
+      const need = wsAct.y - d.y, kNew = lim(-need / w.x), kOld = KX();
+      if (Math.abs(kNew - kOld) >= 0.01) out.axes.push({ ax: 'x', name: '앞뒤 편차', kOld, kNew });
+    } else out.skipped.push('위아래');
+  }
+  out.sig = S.test.shots.map(p => `${p.z},${p.y},${p.bad ? 1 : 0}`).join('|') + `|${w.x},${w.z},${S.pressure}`;
+  return out.axes.length ? out : null;
+}
+function renderDevAsk(){
+  const box = $('devAsk'); if (!box) return;
+  const pr = devProposal();
+  if (!pr || S.test.devNo === pr.sig) { box.hidden = true; return; }
+  const cmw = v => Math.round(v * 100);
+  box.hidden = false;
+  box.innerHTML = `<div class="dv-t">편차가 발생했습니다. 편차를 자동조정하시겠습니까?</div>
+    <div class="dv-s">탄착군 중심이 홍심에서 ${dirWords(pr.d.z, pr.d.y, false)} 벗어났습니다 → ${pr.axes.map(a => `${a.name} <b>${cmw(a.kOld)} → ${cmw(a.kNew)} cm/(m/s)</b>`).join(' · ')}${pr.skipped.length ? `<br><span style="color:var(--ink2)">${pr.skipped.join('·')} 쪽은 설정한 바람이 없어 바람 기준으로 고칠 수 없습니다</span>` : ''}</div>
+    <div class="dv-b"><button class="btn red" id="devYes">예</button><button class="btn" id="devNo">아니오</button></div>`;
+  $('devYes').onclick = () => {
+    pr.axes.forEach(a => { if (a.ax === 'z') S.calWind = 1 / a.kNew; else S.calWindX = 1 / a.kNew; });
+    S.lastAuto = autoAim();   // 겨냥점은 그대로 두고(시사 기록 보존), 앞으로 바람이 바뀔 때부터 새 폭으로 옮긴다
+    changed();
+    toast(`편차폭을 조정했습니다: ${pr.axes.map(a => `${a.name} ${cmw(a.kNew)} cm/(m/s)`).join(' · ')} — 다음에도 쓰려면 ⚙ 개인 기준에서 기본값으로 저장하세요`);
+  };
+  $('devNo').onclick = () => { S.test.devNo = pr.sig; save(); box.hidden = true; };
+}
 const cvTest = $('cvTest');
 function drawTest(){
+  renderDevAsk();
   const ts = S.test.shots, t = A.test;
-  const P = prep(cvTest, [S.test.aim, ...ts, t && t.n >= 3 ? t.rec : null]);
+  const gc = guideCenter(S.test.aim);
+  const P = prep(cvTest, [S.test.aim, ...ts, t && t.n >= 3 ? t.rec : null, ...(guideOn() ? guidePts(gc) : [])]);
   if (!P) return;
   const { g, X, Y, s } = P;
+  if (guideOn()) drawWindGuide(g, X, Y, s, gc, P.w, P.h);
   if (t && t.n >= 2) {
     ellipse(g, X(t.center.z), Y(t.center.y), t.sd.z * s, t.sd.y * s, 'rgba(18,61,138,.8)');
     ellipse(g, X(t.center.z), Y(t.center.y), 2 * t.sd.z * s, 2 * t.sd.y * s, 'rgba(18,61,138,.4)', [4, 3]);
@@ -788,7 +1103,14 @@ function drawTest(){
   { // 평기압 겨냥점(과녁 상단 1/4) 기준선
     const yb = Y(BASE_AIM.y); g.save(); g.setLineDash([6, 5]); g.strokeStyle = 'rgba(47,95,143,.55)'; g.lineWidth = 1.5;
     g.beginPath(); g.moveTo(X(-TW/2) - 12, yb); g.lineTo(X(TW/2) + 12, yb); g.stroke(); g.restore();
-    g.fillStyle = 'rgba(47,95,143,.85)'; g.font = '600 11.5px Noto Sans KR'; g.fillText(`평기압 겨냥선${baseName() === '상단 1/4 지점' ? ' (상단 1/4)' : ''}`, X(TW/2) + 16, yb + 4);
+    if (!guideOn()) {
+      g.fillStyle = 'rgba(47,95,143,.85)'; g.font = '600 11.5px Noto Sans KR';
+      // 좁은 화면에서는 글자가 잘리지 않게 짧게 쓰거나 왼쪽에 쓴다
+      let t = `평기압 겨냥선${baseName() === '상단 1/4 지점' ? ' (상단 1/4)' : ''}`, x = X(TW/2) + 16;
+      if (x + g.measureText(t).width > P.w - 4) t = '평기압선';
+      if (x + g.measureText(t).width > P.w - 4) x = X(-TW/2) - 16 - g.measureText(t).width;
+      g.fillText(t, Math.max(4, x), yb + 4);
+    }
   }
   if (!S.test.aimSet || testAimMode) aimMark(g, X(S.test.aim.z), Y(S.test.aim.y), '오늘 겨냥 지점', '#1f4f8a');
   else ring(g, X(S.test.aim.z), Y(S.test.aim.y), '#2f5f8f', '오늘 겨냥 지점', 11);
@@ -801,19 +1123,35 @@ function drawTest(){
     arrowLine(g, X(S.test.aim.z), Y(S.test.aim.y), X(t.rec.z), Y(t.rec.y), '#c2362b');
     aimMark(g, X(t.rec.z), Y(t.rec.y), '새 표');
   }
-  $('tipTest').textContent = !S.test.aimSet ? '1단계: 기압을 맞추면 겨냥점이 위아래로 움직입니다 — 확인 후 확정하세요' : testAimMode ? '겨냥 지점을 누르세요' : ts.length < 5 ? `${ts.length + 1}번째 화살이 맞은 자리를 누르세요` : '5발 완료 — 오른쪽 결과를 확인하세요';
+  $('tipTest').textContent = pickMode ? '겨냥할 지점을 과녁 그림에서 누르세요' : (!S.test.aimSet || testAimMode) ? '1단계: 기압·바람을 맞추면 겨냥점이 움직입니다 — 그림을 눌러 바꾸려면 "그림에서 직접 찍기"' : ts.length < 5 ? `${ts.length + 1}번째 화살이 맞은 자리를 누르세요` : '5발 완료 — 오른쪽 결과를 확인하세요';
 }
 cvTest.addEventListener('pointerdown', ev => {
   const q = toWorld(cvTest, ev);
-  if (testAimMode || !S.test.aimSet) { if (!anyShot()) aimFromPoint(q); else { S.test.aim = q; S.test.aimManual = true; } if (S.test.aimSet) { testAimMode = false; } }
-  else if (S.test.shots.length < 5) S.test.shots.push(q);
+  if (testAimMode || !S.test.aimSet) {
+    if (!pickMode) { $('tipTest').textContent = '겨냥점을 그림으로 바꾸려면 먼저 "그림에서 직접 찍기"를 누르세요'; return; }   // 실수로 눌려 표가 옮겨지지 않게
+    if (!anyShot()) aimFromPoint(q); else { S.test.aim = q; S.test.aimManual = true; }
+    pickMode = false;
+  }
+  else if (S.test.shots.length < 5) {
+    S.test.shots.push(q);
+    // 겨냥점 초기화 뒤 새로 쏜 시사는 습사 표의 출발점이 되도록 (초기화 표시가 시사를 덮지 않게)
+    if (!S.rounds.some(r => r.some(isRec))) { S.resetIdx = null; S.shifts = []; S.lastAuto = autoAim(); }
+  }
   else { $('tipTest').textContent = '5발을 모두 찍었습니다. 다시 하려면 "시사 다시"를 누르세요'; return; }
   changed();
 });
+$('goSheet2').onclick = () => showTab('sheet');
+// 2단계 건너뛰기: 겨냥점을 확정하고 오늘 겨냥점 그대로 습사 시작
+$('tSkip').onclick = () => {
+  pickMode = false;
+  if (!S.test.aimSet || testAimMode) { S.test.aimSet = true; testAimMode = false; changed(); }
+  showTab('sheet');
+};
 $('tUndo').onclick = () => { S.test.shots.pop(); changed(); };
 $('tBad').onclick = () => { const l = S.test.shots[S.test.shots.length - 1]; if (!l) return; l.bad = !l.bad; changed(); };
-$('tReset').onclick = () => { S.test.shots = []; changed(); };
-$('tAimMode').onclick = () => { testAimMode = !testAimMode; drawTest(); renderAimPick(); };
+$('tReset').onclick = () => { S.test.shots = []; if (!S.rounds.some(r => r.some(isRec))) { S.resetIdx = null; S.shifts = []; } changed(); };
+$('tAimMode').onclick = () => { pickMode = !pickMode; drawTest(); renderAimPick(); };
+document.querySelectorAll('#pChips button').forEach(b => b.onclick = () => { S.pressure = +b.dataset.sky; setAtmosphere(S.pressure, S.tempC); followPressure(); changed(); updateSky(); });
 $('tP').addEventListener('input', () => { S.pressure = +$('tP').value; setAtmosphere(S.pressure, S.tempC); followPressure(); changed(); updateSky(); });
 ['tWz', 'tWx'].forEach(id => $(id).addEventListener('input', () => { S.wind0 = { x: +$('tWx').value, z: -(+$('tWz').value) }; followPressure(); changed(); }));
 let aimResetArm = null;
@@ -837,7 +1175,9 @@ document.querySelectorAll('#aimNudge button').forEach(b => b.onclick = () => {
   if (!anyShot()) aimFromPoint(q); else { S.test.aim = q; S.test.aimManual = true; }
   changed();
 });
+$('aimDone2').onclick = () => { if (!S.test.aimSet || testAimMode) $('aimDone').click(); };
 $('aimDone').onclick = () => {
+  pickMode = false;
   if (!S.test.aimSet) { S.test.aimSet = true; testAimMode = false; }
   else { testAimMode = !testAimMode; }
   changed();
@@ -848,19 +1188,25 @@ function renderAimPick(){
   $('aimState').textContent = set ? '확정' : '고르는 중'; $('aimState').className = 'badge ' + (set ? 'calm' : 'alert');
   const shift = pressureShift(), au = autoAim(), base = BASE_AIM;
   $('tP').value = S.pressure; $('tPO').textContent = S.pressure + ' hPa';
+  $('pSign').textContent = skySigns(S.pressure);
+  { const sz = windSign(S.wind0.z || 0), sx = windSign(S.wind0.x || 0), tot = Math.hypot(S.wind0.x || 0, S.wind0.z || 0), st = windSign(tot);
+    $('wzSign').textContent = `${sz[2]} · ${sz[3]}`; $('wxSign').textContent = `${sx[2]} · ${sx[3]}`;
+    $('wGuide').innerHTML = `<table>${WIND_SIGNS.map(w => `<tr class="${w === st ? 'on' : ''}"><td>${w[1]} m/s</td><td>${w[2]} — ${w[3]}</td></tr>`).join('')}</table><div style="margin-top:3px">지금 합친 바람 ${fmt(tot, 1)} m/s → <b>${st[2]}</b> (분홍 줄)</div>`; }
+  document.querySelectorAll('#pChips button').forEach(b => b.classList.toggle('on', Math.abs(+b.dataset.sky - S.pressure) <= 3));
   document.querySelectorAll('#vMode button').forEach(b => b.classList.toggle('on', b.dataset.vm === S.vMode));
   const w0 = S.wind0, wsh = windShift();
   $('tWz').value = -w0.z; $('tWzO').textContent = Math.abs(w0.z) < 0.05 ? '0' : `${w0.z > 0 ? '왼쪽에서' : '오른쪽에서'} ${fmt(Math.abs(w0.z))}`;
   $('tWx').value = w0.x; $('tWxO').textContent = Math.abs(w0.x) < 0.05 ? '0' : `${w0.x > 0 ? '순풍' : '맞바람'} ${fmt(Math.abs(w0.x))}`;
   $('pFill').style.left = ((S.pressure - 960) / 90 * 100) + '%';
   const vy = pressureVertical(S.pressure);
-  $('pInfo').innerHTML = `<b>${pClass(S.pressure)}</b>${Math.abs(vy) >= 0.02 ? ` · <span style="color:${vy > 0 ? '#b0562a' : '#2f5f8f'}">${vy > 0 ? '상승기류' : '하강기류'} 경향</span>` : ''} · 평기압 겨냥선에서 <b>${Math.abs(shift) < 0.005 ? '그대로' : `${shift > 0 ? '위' : '아래'}로 ${Math.abs(cm(shift))} cm`}</b>${Math.hypot(wsh.z, wsh.y) >= 0.005 ? `<br>바람 보정: <b>${dirWords(wsh.z, wsh.y, false)}</b> <span style="color:var(--ink2)">(${windWords({ x: w0.x, z: w0.z })})</span>` : ''}<br><span style="color:var(--ink2)">실측 기준: ${calInfo().p} hPa에서 ${S.cal.aboveTopCm ? `과녁 윗변 ${S.cal.aboveTopCm > 0 ? '위' : '아래'} ${Math.abs(S.cal.aboveTopCm)} cm` : '과녁 윗변'} · 1 hPa당 ${fmt(calInfo().perHpa * 100, 1)} cm</span>`;
+  $('pInfo').innerHTML = `<b>${pClass(S.pressure)}</b>${Math.abs(vy) >= 0.02 ? ` · <span style="color:${vy > 0 ? '#b0562a' : '#2f5f8f'}">${vy > 0 ? '상승기류' : '하강기류'} 경향</span>` : ''} · 평기압 겨냥선에서 <b>${Math.abs(shift) < 0.005 ? '그대로' : `${shift > 0 ? '위' : '아래'}로 ${Math.abs(cm(shift))} cm`}</b>${Math.hypot(wsh.z, wsh.y) >= 0.005 ? `<br>바람 보정: <b>${dirWords(wsh.z, wsh.y, false)}</b> <span style="color:var(--ink2)">(${windWords({ x: w0.x, z: w0.z })})</span>` : ''}<br><span style="color:var(--ink2)">평기압(${P_LO}~${P_HI} hPa)은 평기압 겨냥선 그대로 · 벗어난 1 hPa당 ${fmt(calInfo().perHpa * 100, 1)} cm</span>`;
   const fromBase = { z: p.z - base.z, y: p.y - base.y };
   $('aimPickText').innerHTML = `오늘 겨냥점: ${baseName()}에서 ${dirWords(fromBase.z, fromBase.y, false)}${S.test.aimManual ? ` <span class="badge" style="background:var(--paper2);color:var(--ink2);font-weight:500">직접 조정 · 자동과 ${dirWords(p.z - au.z, p.y - au.y, false)} 차이</span>` : ''}`;
   const editing = !set || testAimMode;
-  $('aimPresets').style.display = editing ? '' : 'none'; $('tAimAuto').style.display = editing && S.test.aimManual ? '' : 'none'; $('aimNudge').style.display = editing ? '' : 'none'; $('tAimMode').style.display = editing ? '' : 'none';
-  $('tAimMode').classList.toggle('on', testAimMode && set);
-  $('aimDone').textContent = !set ? '이 지점으로 확정' : testAimMode ? '바꾸기 끝' : '겨냥 지점 바꾸기';
+  $('aimPresets').style.display = editing ? '' : 'none'; $('step1Desc').innerHTML = editing ? '오늘의 <b>기압</b>과 <b>바람</b>을 선택하여 표를 정하세요. 정한 뒤 <b>겨냥설정완료</b>를 누르면 시사를 시작할 수 있습니다.' : '오늘의 <b>기압</b>과 <b>바람</b>을 선택하여 표를 정하세요. 기압·바람이 바뀌었으면 아래 <b>겨냥 지점 바꾸기</b>를 눌러 다시 정하세요.'; $('tAimAuto').style.display = editing && S.test.aimManual ? '' : 'none';  $('tAimMode').style.display = editing ? '' : 'none';
+  $('tAimMode').classList.toggle('on', pickMode); $('tAimMode').textContent = pickMode ? '과녁 그림을 누르세요 (취소)' : '그림에서 직접 찍기';
+  $('aimDone').textContent = !set ? '이 지점으로 확정' : testAimMode ? '겨냥설정완료' : '겨냥 지점 바꾸기';
+  $('aimDone2').style.display = editing ? '' : 'none';
   $('shotCard').classList.toggle('dim', !set);
 }
 function renderTestSide(){
@@ -875,7 +1221,7 @@ function renderTestSide(){
       <div class="lab">${n >= 5 ? '시사 결과' : `중간 결과 (${n}발)`} — 표를 이렇게 옮기세요</div>
       <div class="big">${dirWords(move.z, move.y, false)}</div>
       <div class="note" style="margin-top:4px">오늘 겨냥 지점에서 이만큼 옮긴 곳을 겨냥하면 홍심에 모입니다</div>
-      <div class="actions"><button class="btn red" id="goSheet">이 표로 시지 시작 →</button></div>
+      <div class="actions"><button class="btn red" id="goSheet">이 표로 습사 시작 →</button></div>
     </div>
     <div class="card">
       <div class="line"><span>관중</span><span>${hits} / ${t.n}${t.nBad ? ` <span style="color:var(--ink2)">(잘못쏨 ${t.nBad}발 제외)</span>` : ''}</span></div>
@@ -889,34 +1235,65 @@ function windFromD(Dv){ const rz = Dv.z - (0 - S.test.aim.z), ry = Dv.y - (CY - 
 
 // ================= ② 시지 =================
 let selCell = null, overrideMode = false, pendingAim = null, badMode = false;
+// 첫 화살을 기록한 뒤부터는 '겨냥 지점 직접 찍기'를 늘 켜 둔다 (화살마다 표가 달라질 수 있으므로)
+function sheetStarted(){ return S.rounds.some(row => row.some(isRec)); }
+function autoOverride(){ overrideMode = sheetStarted(); pendingAim = null; const b = $('sOverride'); if (b) b.classList.toggle('on', overrideMode); }
 function lastRecCell(){ for (let r = NR - 1; r >= 0; r--) for (let a = NA - 1; a >= 0; a--) if (isRec(S.rounds[r][a])) return { r, a }; return null; }
 const cvSheet = $('cvSheet');
 function targetCell(){ return selCell || (A.next ? { r: A.next.r, a: A.next.a } : null); }
 function recFor(c){ if (!c) return A.recNow; const h = histAt(c.r, c.a); if (h) return h.rec; if (A.next && A.next.r === c.r && A.next.a === c.a) return A.next.rec; return A.recNow; }
+// 겨냥 지점 → 그 자리가 뜻하는 바람(어디서 몇 m/s) : 무풍 기준 표(안내선 0)에서 떨어진 칸 수로 환산
+function aimToWind(p){
+  const c = guideCenter(S.test.aim);
+  return { z: -(p.z - c.z) / GZ(), x: -(p.y - c.y) / GX() };   // z>0 왼쪽에서, x>0 순풍(뒤에서), x<0 맞바람(앞에서)
+}
+function windFromWords(w){
+  const az = Math.abs(w.z), ax = Math.abs(w.x), lr = w.z > 0 ? '왼쪽' : '오른쪽', fb = w.x < 0 ? '앞(과녁 쪽)' : '뒤(사대 쪽)';
+  if (Math.hypot(az, ax) < 0.3) return '바람 거의 없음';
+  if (ax < 0.3 || ax < az * 0.35) return `${lr}에서`;
+  if (az < 0.3 || az < ax * 0.35) return `${fb}에서`;
+  return `${lr} ${w.x < 0 ? '앞' : '뒤'}에서 비스듬히`;
+}
+// 순·시 칸 아래: 지금(또는 옮긴) 표가 뜻하는 바람을 화살표 하나로 보여 준다 (화면 위 = 과녁 쪽)
+function aimWindHTML(p, title, hot){
+  if (!p) return '';
+  const w = aimToWind(p), sp = Math.hypot(w.x, w.z);
+  if (sp < 0.3) return `<div class="aw"><span class="aw-ic calm">○</span><span class="aw-t"><b>${title}: 바람 거의 없음</b></span></div>`;
+  const col = sp < 1.6 ? '#3b82c4' : sp < 3.4 ? '#d9901a' : '#d2382c';
+  const deg = Math.atan2(-w.x, w.z) * 180 / Math.PI;   // 바람이 불어 가는 방향 (오른쪽 = 0°, 화면 아래가 +)
+  const parts = [Math.abs(w.z) >= 0.1 ? `${w.z > 0 ? '왼쪽' : '오른쪽'} 옆바람 ${fmt(Math.abs(w.z), 1)}` : '', Math.abs(w.x) >= 0.1 ? `${w.x < 0 ? '맞바람' : '순풍'} ${fmt(Math.abs(w.x), 1)}` : ''].filter(Boolean).join(' · ');
+  return `<div class="aw${hot ? ' hot' : ''}"><svg class="aw-ic" viewBox="-24 -24 48 48" width="46" height="46"><circle r="22" fill="#fff" stroke="${col}" stroke-opacity=".35" stroke-width="2"/><g transform="rotate(${deg.toFixed(1)})"><line x1="-15" y1="0" x2="8" y2="0" stroke="${col}" stroke-width="6" stroke-linecap="round"/><path d="M18 0 L4 -10 L4 10 Z" fill="${col}"/></g></svg><span class="aw-t"><span class="aw-s">${title}</span><b>${windFromWords(w)} ${fmt(sp, 1)} m/s</b><span class="aw-s">${parts}</span></span></div>`;
+}
 function drawSheet(){
   const c = targetCell(), rec = recFor(c), cur = c ? S.rounds[c.r][c.a] : null;
   const prevH = A.hist.filter(h => !h.miss).slice(-1)[0];
   const pts = [rec, prevH && prevH.aim, S.test.aim];
   if (A.safe && A.safe.rect) pts.push({ z: A.safe.rect.z0, y: A.safe.rect.y0 }, { z: A.safe.rect.z1, y: A.safe.rect.y1 });
   S.rounds.forEach(row => row.forEach(p => { if (hasImp(p)) pts.push(p); if (p && p.aim) pts.push(p.aim); }));
+  const gcS = guideCenter(S.test.aim);   // 시지에서도 안내선은 설정한 자리(무풍 기준 표)에 고정
+  if (guideOn()) pts.push(...guidePts(gcS));
   const P = prep(cvSheet, pts); if (!P) return;
   const { g, X, Y, s } = P;
+  if (guideOn() && !(c && isRec(cur))) drawWindGuide(g, X, Y, s, gcS, P.w, P.h);
   const curR = c && S.rounds[c.r].some(hasImp) ? c.r : (A.lastRec ? A.lastRec.r : (c ? c.r : 0));
-  // 이전 순 착점(연하게), 이번 순 착점(번호)
-  S.rounds.forEach((row, r) => row.forEach((p, a) => {
+  // 이전 순 착점(연하게), 이번 순 착점(번호) — '이전 화살 표시'를 끄면 그리지 않는다
+  const showPrev = S.showPrev !== false;
+  if (showPrev) S.rounds.forEach((row, r) => row.forEach((p, a) => {
     if (!hasImp(p)) return;
     if (r === curR) return;
     g.fillStyle = 'rgba(18,61,138,.22)'; g.beginPath(); g.arc(X(p.z), Y(p.y), 5, 0, Math.PI*2); g.fill();
   }));
   S.rounds[curR].forEach((p, a) => {
     if (!hasImp(p)) return;
+    const isCurEdit = c && c.r === curR && c.a === a;
+    if (!showPrev && !isCurEdit) return;
     const h = histAt(curR, a);
     if (h && h.aim) { g.strokeStyle = 'rgba(47,95,143,.45)'; g.lineWidth = 1.4; g.setLineDash([3, 3]); g.beginPath(); g.moveTo(X(h.aim.z), Y(h.aim.y)); g.lineTo(X(p.z), Y(p.y)); g.stroke(); g.setLineDash([]); }
     shotDot(g, X(p.z), Y(p.y), p.bad ? '#a39a8c' : isHit(p) ? '#123d8a' : '#d9731f', a + 1, 10);
   });
   // 직전 표 → 지금 표
   const editing = c && isRec(cur);
-  if (!editing && prevH && prevH.aim) {
+  if (!editing && showPrev && prevH && prevH.aim) {
     ring(g, X(prevH.aim.z), Y(prevH.aim.y), 'rgba(47,95,143,.55)', '직전 표', 9);
     arrowLine(g, X(prevH.aim.z), Y(prevH.aim.y), X(rec.z), Y(rec.y), '#c2362b');
   }
@@ -932,32 +1309,60 @@ function drawSheet(){
       g.fillStyle = '#1d5a37'; g.font = '700 12px Noto Sans KR'; g.fillText('홍심 안전지대', X(sf.c.z) + sf.r * s + 6, Y(sf.c.y) + 18); }
   }
   const showAim = pendingAim || (editing && cur.aim) || rec;
-  ring(g, X(S.test.aim.z), Y(S.test.aim.y), 'rgba(47,95,143,.35)', '오늘 겨냥 지점', 7);
-  aimMark(g, X(showAim.z), Y(showAim.y), pendingAim ? '직접 고른 겨냥 지점' : editing ? `${c.r+1}순 ${c.a+1}시 표` : '여기 겨냥');
+  // 시지 화면에서는 '오늘 겨냥 지점' 표시를 그리지 않는다 (안내선 0과 여기 겨냥만)
+  if (pendingAim) {
+    // 추천겨냥점은 연하게 남겨 두고, 직접 고른 지점은 다른 모양(파란 핀)으로 구분한다
+    if (rec) { g.save(); g.globalAlpha = 0.45; aimMark(g, X(rec.z), Y(rec.y), '추천겨냥점'); g.restore(); }
+    pickMark(g, X(pendingAim.z), Y(pendingAim.y), '내가 고른 겨냥점');
+  } else aimMark(g, X(showAim.z), Y(showAim.y), editing ? `${c.r+1}순 ${c.a+1}시 표` : '추천겨냥점');
   if (editing && hasImp(cur)) { g.strokeStyle = '#c2362b'; g.lineWidth = 2; g.beginPath(); g.arc(X(cur.z), Y(cur.y), 15, 0, Math.PI*2); g.stroke(); }
-  $('tipSheet').textContent = badMode && c ? `${c.r+1}순 ${c.a+1}시 잘못쏨 — 맞은 자리를 누르세요` : !c ? '9순을 모두 기록했습니다' : overrideMode && !pendingAim ? '이번 화살에 겨냥할(겨냥한) 지점을 먼저 누르세요' : editing ? `${c.r+1}순 ${c.a+1}시 수정 — 맞은 자리를 다시 누르세요` : `${c.r+1}순 ${c.a+1}시 — 맞은 자리를 누르세요`;
+  const RS = c ? `<span class="rs">${c.r+1}순 ${c.a+1}시</span>` : '';
+  const ACT = (t, cls, sub) => `<div class="rs-act ${cls}">${t}</div>${sub ? `<div class="rs-sm">${sub}</div>` : ''}`;
+  const HEAD = a => `<div class="st-head">${RS}<div class="st-act">${a}</div></div>`;
+  $('tipSheet').innerHTML = !c ? '9순을 모두 기록했습니다'
+    : badMode ? HEAD(ACT('맞은 지점 선택', 'hit', '잘못쏨으로 기록합니다'))
+    : overrideMode && !pendingAim && !editing ? HEAD(ACT('겨냥할 지점 선택', 'aim', '이번 화살에 겨냥한 자리를 누르세요'))
+    : editing ? HEAD(ACT('맞은 지점 선택', 'hit', '수정 — 맞은 자리를 다시 누르세요'))
+    : HEAD(ACT('맞은 지점 선택', 'hit', ''));
+  if (c) $('tipSheet').innerHTML += aimWindHTML(showAim, pendingAim ? '옮긴 표' : editing ? '이 화살 표' : '지금 표', !!pendingAim) + '<div class="rs-note">누른 정보는 하단에 습사일지로 기록됩니다</div>';
 }
-cvSheet.addEventListener('pointerdown', ev => {
+// 화면을 밀어 내리다 과녁이 눌리지 않도록: 손가락을 거의 움직이지 않고 짧게 톡 친 경우만 기록한다
+let sheetTap = null;
+cvSheet.addEventListener('pointerdown', ev => { if (ev.isPrimary === false) { sheetTap = null; return; } sheetTap = { x: ev.clientX, y: ev.clientY, t: Date.now(), id: ev.pointerId }; });
+cvSheet.addEventListener('pointermove', ev => { if (sheetTap && ev.pointerId === sheetTap.id && Math.hypot(ev.clientX - sheetTap.x, ev.clientY - sheetTap.y) > 10) sheetTap = null; });
+cvSheet.addEventListener('pointercancel', () => { sheetTap = null; });
+cvSheet.addEventListener('pointerleave', () => { sheetTap = null; });
+cvSheet.addEventListener('pointerup', ev => {
+  const t = sheetTap; sheetTap = null;
+  if (!t || ev.pointerId !== t.id) return;
+  if (Math.hypot(ev.clientX - t.x, ev.clientY - t.y) > 10 || Date.now() - t.t > 700) return;
+  sheetHit(ev);
+});
+function sheetHit(ev){
   const c = targetCell(); if (!c) return;
   const q = toWorld(cvSheet, ev);
-  if (overrideMode && !pendingAim) { pendingAim = q; drawSheet(); return; }
   const cur = S.rounds[c.r][c.a];
+  if (overrideMode && !pendingAim && !isRec(cur)) { pendingAim = q; drawSheet(); return; }
   const aim = pendingAim || (cur && cur.aim) || recFor(c);
+  const own = !!pendingAim || !!(cur && cur.own);   // '겨냥 지점 직접 찍기'로 쏜 화살만 직접 옮긴 표로 본다
   S.rounds[c.r][c.a] = { aim: { z: +aim.z.toFixed(3), y: +aim.y.toFixed(3) }, z: q.z, y: q.y };
+  if (own) S.rounds[c.r][c.a].own = true;
   if (badMode || (cur && cur.bad)) S.rounds[c.r][c.a].bad = true;
   badMode = false;
-  pendingAim = null; overrideMode = false; $('sOverride').classList.remove('on'); selCell = null;
+  selCell = null; autoOverride();
   changed();
-});
+}
 $('sMiss').onclick = () => {
   const c = targetCell(); if (!c) return;
   const cur = S.rounds[c.r][c.a], aim = pendingAim || (cur && cur.aim) || recFor(c);
   S.rounds[c.r][c.a] = { aim: { z: +aim.z.toFixed(3), y: +aim.y.toFixed(3) }, miss: true };
-  pendingAim = null; overrideMode = false; $('sOverride').classList.remove('on'); selCell = null; changed();
+  if (pendingAim || (cur && cur.own)) S.rounds[c.r][c.a].own = true;
+  selCell = null; autoOverride(); changed();
 };
 $('sUndo').onclick = () => {
-  if (selCell) { S.rounds[selCell.r][selCell.a] = null; selCell = null; changed(); return; }
-  for (let r = NR - 1; r >= 0; r--) for (let a = NA - 1; a >= 0; a--) if (isRec(S.rounds[r][a])) { S.rounds[r][a] = null; changed(); return; }
+  if (pendingAim) { pendingAim = null; drawSheet(); return; }   // 먼저 찍은 겨냥 지점부터 취소
+  if (selCell) { S.rounds[selCell.r][selCell.a] = null; selCell = null; autoOverride(); changed(); return; }
+  for (let r = NR - 1; r >= 0; r--) for (let a = NA - 1; a >= 0; a--) if (isRec(S.rounds[r][a])) { S.rounds[r][a] = null; autoOverride(); changed(); return; }
 };
 $('sBad').onclick = () => {
   if (selCell && isRec(S.rounds[selCell.r][selCell.a])) { const p = S.rounds[selCell.r][selCell.a]; p.bad = !p.bad; changed(); return; }
@@ -1008,13 +1413,22 @@ function renderSheet(){
   else if (selCell && isRec(S.rounds[c.r][c.a])) $('aimCard').innerHTML = `<div class="lab">${c.r+1}순 ${c.a+1}시 고치는 중${S.rounds[c.r][c.a].bad ? ' · <b>잘못쏨</b>(계산 제외)' : ''}</div><div class="big" style="font-size:19px">맞은 자리를 다시 누르세요</div><div class="actions"><button class="btn" id="endEdit">고치기 끝</button></div>`;
   else {
     const move = prevH && prevH.aim ? { z: r0.z - prevH.aim.z, y: r0.y - prevH.aim.y } : null;
-    $('aimCard').innerHTML = `<div class="lab">${c.r+1}순 ${c.a+1}시 — 여기를 겨냥하세요</div>
+    $('aimCard').innerHTML = `<div class="lab"><span class="rs">${c.r+1}순 ${c.a+1}시</span>여기를 겨냥하세요</div>
       <div class="lab" style="margin-top:2px">오늘 겨냥 지점에서</div>
       <div class="big">${dirWords(r0.z - S.test.aim.z, r0.y - S.test.aim.y, false)}</div>
-      <div class="note" style="margin-top:3px">${prevH && prevH.trust ? '직접 옮긴 표가 홍심에 맞았습니다 — 그 표 그대로' : prevH && prevH.own && move ? `직접 옮긴 표 기준 — 빗나간 만큼만 ${dirWords(move.z, move.y)}` : move ? `직전 표에서 ${dirWords(move.z, move.y)}` : A.test ? '시사 5발 결과에서 잡은 표' : '시사 기록이 없어 오늘 겨냥 지점부터 시작'}</div>`;
+      <div class="note" style="margin-top:3px">${Math.abs(A_K.k.z - 1) >= 0.05 || Math.abs(A_K.k.y - 1) >= 0.05 ? `<span style="color:#2f7d4f">이동 폭 보정 반영(좌우 ${fmt(A_K.k.z, 2)}배 · 상하 ${fmt(A_K.k.y, 2)}배)</span> · ` : ''}${prevH && prevH.trust ? '직접 옮긴 표가 홍심에 맞았습니다 — 그 표 그대로' : prevH && prevH.own && move ? `직접 옮긴 표 기준 — 빗나간 만큼만 ${dirWords(move.z, move.y)}` : move ? `직전 표에서 ${dirWords(move.z, move.y)}` : A.test ? '시사 5발 결과에서 잡은 표' : '시사 기록이 없어 오늘 겨냥 지점부터 시작'}</div>`;
   }
   if (c && !(selCell && isRec(S.rounds[c.r][c.a]))) {
     const lc = lastRecCell(), lp = lc && S.rounds[lc.r][lc.a];
+    // 방금 화살이 표를 얼마나 옮겼는지 바로 보이게
+    const lh = lc && histAt(lc.r, lc.a);
+    if (S.showPrev !== false && lh && !lh.miss && hasImp(lp)) {
+      const off = { z: lp.z - 0, y: lp.y - CY }, mv = { z: r0.z - lh.aim.z, y: r0.y - lh.aim.y };
+      const why = lh.own ? '직접 옮긴 표 기준' : lh.changed ? '바람 변화 감지 — 크게 반영' : lh.bigMiss ? '크게 벗어나 많이 반영' : `반응 ${S.gain === 'low' ? '둔하게' : S.gain === 'high' ? '민감하게' : '보통'}`;
+      $('aimCard').innerHTML += `<div class="note" style="margin-top:6px;padding:6px 8px;background:#fff;border-radius:7px;border:1px solid #e6b4aa">방금 화살(${lc.r+1}순 ${lc.a+1}시): 홍심에서 ${dirWords(off.z, off.y, false).replace('그대로', '정중앙')} → 표를 <b>${dirWords(mv.z, mv.y, false)}</b> 옮김 <span style="color:var(--ink2)">(${why})</span></div>`;
+    } else if (lp && lp.bad) {
+      $('aimCard').innerHTML += `<div class="note" style="margin-top:6px">방금 화살은 잘못쏨으로 표시되어 표를 옮기지 않았습니다.</div>`;
+    }
     if (badMode) $('aimCard').innerHTML += `<div class="safebox" style="background:#ece7dd;border-color:#cfc6b4;color:#4a4238"><b>잘못쏨으로 기록</b> — 다음에 찍는 화살은 시지에는 남고 바람·표 계산에서는 빠집니다.</div>`;
     else if (lp) $('aimCard').innerHTML += `<div class="actions"><button class="btn" id="quickBad">${lp.bad ? `${lc.r+1}순 ${lc.a+1}시 잘못쏨 취소` : `방금 화살(${lc.r+1}순 ${lc.a+1}시) 잘못쏨`}</button></div>`;
   }
@@ -1032,9 +1446,37 @@ function renderSheet(){
     <div style="font-size:17px;font-weight:700;margin-top:4px">${windWords(w)}</div>
     <div class="note" style="margin-top:2px">${fmt(sp)} m/s · ${beaufort(sp)} · 탄착 쏠림 ${dirWords(A.D.z, A.D.y, false)}</div>`;
   document.querySelectorAll('#gainSeg button').forEach(b => b.classList.toggle('on', b.dataset.g === S.gain));
+  renderKCard();
   drawSheet();
 }
 document.querySelectorAll('#gainSeg button').forEach(b => b.onclick = () => { S.gain = b.dataset.g; changed(); });
+$('kToggle').onclick = () => { S.kAuto = !(S.kAuto !== false); changed(); };
+// ----- 이동 폭 보정 카드 -----
+function lastRecIdx(){ const lc = lastRecCell(); return lc ? lc.r * NA + lc.a : -1; }
+function renderKCard(){
+  const K = A_K, kz = K.k.z, ky = K.k.y;
+  const word = (v, ax) => Math.abs(v - 1) < 0.05 ? '1:1 (그대로)' : `${fmt(v, 2)}배 — 표 10 cm 옮기면 착점 ${Math.round(10 * v)} cm`;
+  const lastH = A.hist.filter(x => !x.miss).slice(-1)[0];
+  let upd = '';
+  if (lastH && lastH.kUpd && (lastH.kUpd.z || lastH.kUpd.y)) upd = `<div class="safebox" style="margin-top:6px">방금 화살: 표를 옮긴 폭과 착점이 움직인 폭이 달라 이동 폭을 다시 맞췄습니다.</div>`;
+  $('kCard').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div class="lab">이동 폭 보정 ${K.auto ? '<span class="badge calm">자동</span>' : '<span class="badge" style="background:var(--paper2);color:var(--ink2)">꺼짐</span>'}</div></div>
+    <div class="line"><span>좌우</span><span>${word(kz)}</span></div>
+    <div class="line"><span>상하</span><span>${word(ky)}</span></div>
+    <div class="note" style="margin-top:2px">표를 옮겼는데 착점이 더 많이(또는 덜) 움직이면 그 비율을 배워 다음 표의 이동 폭을 맞춥니다. 오늘 학습: 좌우 ${K.n.z}회 · 상하 ${K.n.y}회</div>${upd}
+    <div class="actions" style="margin-top:8px">
+      <button class="btn" id="kOne">1:1로 되돌리기</button>
+      <button class="btn" id="kSave">이 배율을 내 기본값으로</button>
+    </div>`;
+  $('kToggle').classList.toggle('on', K.auto); $('kToggle').textContent = K.auto ? '이동 폭 자동 보정 켜짐' : '이동 폭 자동 보정 꺼짐';
+  $('kState').textContent = K.auto ? `좌우 ${fmt(kz, 2)}배 · 상하 ${fmt(ky, 2)}배` : '1:1로 계산 중';
+  $('kOne').onclick = () => { S.kBase = { z: 1, y: 1 }; S.kResetIdx = lastRecIdx(); changed(); };
+  $('kSave').onclick = () => {
+    S.kBase = { z: +A_K.k.z.toFixed(3), y: +A_K.k.y.toFixed(3) }; S.kResetIdx = lastRecIdx();
+    persDef = Object.assign({}, defP(), persDef || {}, { k: S.kBase });
+    try { localStorage.setItem('gukgung-pers', JSON.stringify(persDef)); } catch (e) {}
+    changed(); $('kSave').textContent = '저장했습니다 ✓';
+  };
+}
 
 // ================= 시지 이미지 저장 =================
 let DL = null;
@@ -1334,9 +1776,10 @@ function update3d(){
   const pToday = { z: T.z + A_R0.z, y: T.y + A_R0.y };
   const Lt = solveLaunch(S.v0, pToday.y, pToday.z, wsim), today = simulate(S.v0, Lt.theta, Lt.psi, wsim, { record: true });
   const Ln = solveLaunch(S.v0, T.y, T.z, wsim), now = simulate(S.v0, Ln.theta, Ln.psi, wsim, { record: true });
-  const moved = Math.hypot(A.recNow.z - aim.z, A.recNow.y - aim.y) > 0.03;
-  dyn.add(sightLine(aim, 0x2f5f8f));
-  dyn.add(tube(today.pts, 0x2f5f8f, moved ? 0.06 : 0.09, moved ? 0.75 : 1));
+  // 습사가 시작되면(시지 기록이 하나라도 있으면) 오늘 겨냥점은 감추고 현재 겨냥점만 보여 준다
+  const started = S.rounds.some(row => row.some(isRec));
+  const moved = started || Math.hypot(A.recNow.z - aim.z, A.recNow.y - aim.y) > 0.03;
+  if (!started) { dyn.add(sightLine(aim, 0x2f5f8f)); dyn.add(tube(today.pts, 0x2f5f8f, moved ? 0.06 : 0.09, moved ? 0.75 : 1)); }
   if (moved) { dyn.add(sightLine(A.recNow, 0xc2362b)); dyn.add(tube(now.pts, 0xc2362b, 0.09, 1)); }
   const main = moved ? now : today;
   const ap = main.pts.reduce((m, p) => p[2] > m[2] ? p : m, main.pts[0]);
@@ -1344,17 +1787,19 @@ function update3d(){
   pole.position.set(ap[1], ap[2] / 2, ap[3]); dyn.add(pole);
   const lb = label(`최고 ${fmt(ap[2], 1)} m`, '#5c3b0a', 'rgba(247,236,217,.95)', 30); lb.position.set(ap[1], ap[2] + 1.6, ap[3]); dyn.add(lb);
   // 과녁면(허공 포함): 오늘 겨냥점, 지금 표, 착점들
-  dyn.add(disc(aim, 0x2f5f8f, 0.16));
-  const aw = faceToWorld(aim.y, aim.z), al = label('오늘 겨냥점', '#1f4f8a', 'rgba(255,255,255,.9)', 26);
-  al.position.set(aw.x - 0.3, aw.y + 0.45, aw.z); al.scale.multiplyScalar(0.35); dyn.add(al);
+  if (!started) {
+    dyn.add(disc(aim, 0x2f5f8f, 0.16));
+    const aw = faceToWorld(aim.y, aim.z), al = label('오늘 겨냥점', '#1f4f8a', 'rgba(255,255,255,.9)', 26);
+    al.position.set(aw.x - 0.3, aw.y + 0.45, aw.z); al.scale.multiplyScalar(0.35); dyn.add(al);
+  }
   if (moved) {
     dyn.add(disc(A.recNow, 0xc2362b, 0.16));
-    const rw = faceToWorld(A.recNow.y, A.recNow.z), rl = label('지금 표', '#9e2f22', 'rgba(255,255,255,.9)', 26);
+    const rw = faceToWorld(A.recNow.y, A.recNow.z), rl = label(started ? '현재 겨냥점' : '지금 표', '#9e2f22', 'rgba(255,255,255,.9)', 26);
     rl.position.set(rw.x - 0.3, rw.y + 0.45, rw.z); rl.scale.multiplyScalar(0.35); dyn.add(rl);
   }
   S.rounds.forEach(row => row.forEach(p => { if (hasImp(p)) dyn.add(dot(p, p.bad ? 0xa39a8c : 0x123d8a, 0.045)); }));
   S.test.shots.forEach(p => dyn.add(dot(p, 0x6f8fc9, 0.04)));
-  if (today.reached) dyn.add(dot({ z: today.z, y: today.y }, 0x2f5f8f, 0.06));
+  if (!started && today.reached) dyn.add(dot({ z: today.z, y: today.y }, 0x2f5f8f, 0.06));
   // 바람: 수평 화살표 + 성분 표시
   const sp = Math.hypot(w.x, w.z), yawA = Math.atan2(-w.z, w.x);
   if (sp > 0.05) {
@@ -1381,26 +1826,51 @@ function update3d(){
   const pl = label(`${S.pressure > 1019 ? 'H ' : S.pressure < 1007 ? 'L ' : ''}${pc} ${S.pressure} hPa`, S.pressure > 1019 ? '#1f4a78' : S.pressure < 1007 ? '#a8402c' : '#6b604f', 'rgba(255,255,255,.9)', 34);
   pl.position.set(80, 27, 0); pl.scale.multiplyScalar(1.6); dyn.add(pl);
   socks.forEach(s => { s.yaw.rotation.y = yawA; s.pitch.userData.droop = -(1 - Math.min(sp / 7, 1)) * 1.3; });
-  renderEnvHud(today, now, moved);
+  renderEnvHud(today, now, moved, started);
 }
 let hudOpen = false, legOpen = false;
-function renderEnvHud(today, now, moved){
+// 지금 바람 상황을 말로 풀어 쓴다 (3D 화면 하단)
+function windStory(){
+  const w = A.wind, P = S.pressure, hi = P > P_HI, lo = P < P_LO;
+  const adj = v => { v = Math.abs(v); return v < 1.6 ? '약한 ' : v < 3.4 ? '' : v < 5.5 ? '제법 센 ' : '강한 '; };
+  const head = w.x <= -0.5, tail = w.x >= 0.5, side = Math.abs(w.z) >= 0.5;
+  const lr = w.z > 0 ? '왼쪽에서' : '오른쪽에서', tot = Math.hypot(w.x, w.z);
+  let core = '';
+  if (head || tail) core = `${adj(tot)}${head ? '맞바람' : '뒷바람(순풍)'}이${side ? ` ${lr} 비스듬히` : ''}`;
+  else if (side) core = `${adj(w.z)}옆바람이 ${lr} ${w.z > 0 ? '오른쪽으로' : '왼쪽으로'}`;
+  const pres = hi ? '고기압 영향으로 위에서 내려찍는 바람' : lo ? '저기압 영향으로 아래에서 띄워 주는 바람' : '';
+  let s1;
+  if (!pres && !core) s1 = '평기압에 바람도 거의 없는 고요한 상태입니다.';
+  else if (pres && core) s1 = `${pres}과 함께 ${core} 불어오는 중입니다.`;
+  else if (pres) s1 = `${pres}이 있고, 수평 바람은 거의 없습니다.`;
+  else s1 = `평기압 속에 ${core} 불어오는 중입니다.`;
+  const tips = [];
+  const shortF = (hi ? 1 : 0) + (head ? 1 : 0), longF = (lo ? 1 : 0) + (tail ? 1 : 0);
+  if (shortF && !longF) tips.push('짧은 화살에 주의하세요');
+  else if (longF && !shortF) tips.push('화살이 과녁을 넘기 쉬우니 넘는 화살에 주의하세요');
+  else if (shortF && longF) tips.push(hi ? '고기압은 화살을 짧게, 순풍은 길게 만들어 서로 일부 상쇄됩니다' : '저기압은 화살을 길게, 맞바람은 짧게 만들어 서로 일부 상쇄됩니다');
+  if (side) tips.push(`화살이 ${w.z > 0 ? '오른쪽' : '왼쪽'}으로 밀리기 쉬우니 주의하세요`);
+  if (!tips.length) tips.push('평소 표대로 쏘기 좋은 조건입니다');
+  return `${s1} ${tips.join('. ')}.`;
+}
+function renderEnvHud(today, now, moved, started){
   const w = A.wind, sp = Math.hypot(w.x, w.z), n = A.hist.filter(h => !h.miss).length;
   const src = n ? `시사 ${A.test ? A.test.n : 0}발 + 시지 ${n}발로 추정` : A.test ? `시사 ${A.test.n}발로 추정` : '기록이 없어 무풍으로 표시';
   const col = '#' + windColor(sp).getHexString();
+  { const st = $('envStory'); st.textContent = windStory(); const v = $('view'); requestAnimationFrame(() => v.style.setProperty('--nh', (st.offsetHeight + 18) + 'px')); }
   $('envHud').innerHTML = `<div class="sum" id="hudSum"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${col}"></span><b>${sp > 0.05 ? `${fmt(sp)} m/s · ${beaufort(sp)}` : '바람 거의 없음'}</b><button class="tog">${hudOpen ? '접기 ▴' : '자세히 ▾'}</button></div>
     <div class="more" ${hudOpen ? '' : 'hidden'}>
       <div><b>${windWords(w)}</b></div>
       <div>${S.pressure} hPa (평기압 대비 ${S.pressure >= 1013 ? '+' : ''}${S.pressure - 1013})${Math.abs(S.pressure - 1013) >= 3 ? ` · ${S.pressure < 1013 ? '상승기류' : '하강기류'} 경향` : ''}</div>
-      <div>오늘 겨냥점으로 쏘면 착점: <b>${today.reached ? dirWords(today.z, today.y - CY, false).replace('그대로', '홍심 중심') : '-'}</b></div>
-      ${moved ? `<div>지금 표(빨강)는 오늘 겨냥점에서 ${dirWords(A.recNow.z - S.test.aim.z, A.recNow.y - S.test.aim.y, false)}</div>` : ''}
+      ${started ? `<div>현재 겨냥점(빨강)으로 쏘면 착점: <b>${now.reached ? dirWords(now.z, now.y - CY, false).replace('그대로', '홍심 중심') : '-'}</b></div>` : `<div>오늘 겨냥점으로 쏘면 착점: <b>${today.reached ? dirWords(today.z, today.y - CY, false).replace('그대로', '홍심 중심') : '-'}</b></div>`}
+      ${moved && !started ? `<div>지금 표(빨강)는 오늘 겨냥점에서 ${dirWords(A.recNow.z - S.test.aim.z, A.recNow.y - S.test.aim.y, false)}</div>` : ''}
       <div style="color:var(--ink2)">${src}</div>
       <canvas id="trend"></canvas>
       <div style="font-size:11px;color:var(--ink2)"><span style="color:#c2362b">━</span> 좌우(+오른쪽) · <span style="color:#2f5f8f">━</span> 앞뒤(+순풍) · 화살마다 변화</div>
     </div>`;
-  $('hudSum').onclick = () => { hudOpen = !hudOpen; renderEnvHud(today, now, moved); };
-  $('legend').innerHTML = `<div class="lt" id="legT">범례 ${legOpen ? '▴' : '▾'}</div><div class="body" ${legOpen ? '' : 'hidden'}><div><span class="k" style="background:#2f5f8f"></span>오늘 겨냥점(파란 점선 = 조준선)으로 쏜 화살</div><div><span class="k" style="background:#c2362b"></span>바람 변화로 옮긴 지금 표로 쏜 화살 → 홍심</div><div>세로 화살표 = 기압차로 생기는 <span style="color:#d0662a">▲상승</span>/<span style="color:#3a74b8">▼하강</span> 기류 (기압차가 클수록 많고 길게)</div><div>화살표·흐르는 선·풍향 자루 = 바람 방향 · 길이와 색(<span style="color:#3b82c4">●</span>약 <span style="color:#e0a12a">●</span>중 <span style="color:#d2382c">●</span>강) = 세기</div></div>`;
-  $('legT').onclick = () => { legOpen = !legOpen; renderEnvHud(today, now, moved); };
+  $('hudSum').onclick = () => { hudOpen = !hudOpen; renderEnvHud(today, now, moved, started); };
+  $('legend').innerHTML = `<div class="lt" id="legT">범례 ${legOpen ? '▴' : '▾'}</div><div class="body" ${legOpen ? '' : 'hidden'}>${started ? '<div><span class="k" style="background:#c2362b"></span>현재 겨냥점(빨간 점선 = 조준선)으로 쏜 화살 → 홍심</div>' : '<div><span class="k" style="background:#2f5f8f"></span>오늘 겨냥점(파란 점선 = 조준선)으로 쏜 화살</div><div><span class="k" style="background:#c2362b"></span>바람 변화로 옮긴 지금 표로 쏜 화살 → 홍심</div>'}<div>세로 화살표 = 기압차로 생기는 <span style="color:#d0662a">▲상승</span>/<span style="color:#3a74b8">▼하강</span> 기류 (기압차가 클수록 많고 길게)</div><div>화살표·흐르는 선·풍향 자루 = 바람 방향 · 길이와 색(<span style="color:#3b82c4">●</span>약 <span style="color:#e0a12a">●</span>중 <span style="color:#d2382c">●</span>강) = 세기</div></div>`;
+  $('legT').onclick = () => { legOpen = !legOpen; renderEnvHud(today, now, moved, started); };
   if (hudOpen) drawTrend();
 }
 function drawTrend(){
@@ -1444,9 +1914,11 @@ function loop(now){
 let curTab = 'test', dirty3d = true;
 function showTab(t){
   curTab = t;
+  if (t === 'sheet' && (!S.test.aimSet || testAimMode)) { S.test.aimSet = true; testAimMode = false; pickMode = false; save(); syncGuideBtns(); }   // 습사에 들어오면 겨냥점은 확정된 것으로 본다 (안내선·바람 표시가 꺼지지 않도록)
   document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
   document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + t));
   window.scrollTo(0, 0);
+  if (persOpen) renderPers();
   requestAnimationFrame(() => {
     if (t === 'test') drawTest();
     if (t === 'sheet') renderSheet();
@@ -1456,8 +1928,8 @@ function showTab(t){
 }
 document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => showTab(b.dataset.tab));
 function changed(){
-  save(); analyze(); dirty3d = true;
-  renderTestSide(); drawTest(); renderSheet(); renderSettings();
+  save(); analyze(); dirty3d = true; logAutoSave();
+  renderTestSide(); drawTest(); renderSheet(); renderSettings(); renderPers(); syncGuideBtns();
   if (curTab === 'env') { update3d(); dirty3d = false; }
 }
 function renderSettings(){
@@ -1481,7 +1953,7 @@ $('calW').addEventListener('change', () => { const v = parseFloat($('calW').valu
   if (isFinite(c)) S.cal.aboveTopCm = Math.round(c);
   followPressure(); changed();
 }));
-$('setDate').onchange = () => { S.date = $('setDate').value; save(); };
+$('setDate').onchange = () => { const from = S.date; S.date = $('setDate').value || localDate(); logMoveDate(from, S.date); save(); };
 $('setPlace').onchange = () => { S.place = $('setPlace').value; save(); };
 $('applyTime').onclick = () => {
   let T = parseFloat($('setTime').value); if (!isFinite(T)) { $('v0Note').textContent = '도달 시간을 초 단위로 넣어 주세요.'; return; }
@@ -1506,13 +1978,130 @@ let resetArm = null;
 $('xReset').onclick = () => {
   if (!resetArm) { $('xReset').textContent = '한 번 더 누르면 지웁니다'; resetArm = setTimeout(() => { resetArm = null; $('xReset').textContent = '오늘 기록 모두 지우기'; }, 2500); return; }
   clearTimeout(resetArm); resetArm = null; $('xReset').textContent = '오늘 기록 모두 지우기';
-  S.wind0 = { x: 0, y: 0, z: 0 }; S.test = { aim: { z: 0, y: TH * 0.75 }, aimSet: false, aimManual: false, shots: [] }; S.resetIdx = null; S.shifts = []; S.lastAuto = null; testAimMode = true; S.test.aim = autoAim(); S.rounds = blankRounds(); S.date = new Date().toISOString().slice(0, 10); selCell = null; changed();
+  // 개인 기준(평기압 겨냥선·기압/좌우/앞뒤 편차·이동 폭 기본값)은 그대로 둔다
+  const keep = { baseY: S.baseY, calWind: S.calWind, calWindX: S.calWindX, cal: { ...S.cal }, kBase: S.kBase, kAuto: S.kAuto, guide: S.guide, showPrev: S.showPrev, gain: S.gain };
+  S.wind0 = { x: 0, y: 0, z: 0 }; S.test = { aim: { z: 0, y: TH * 0.75 }, aimSet: false, aimManual: false, shots: [] };
+  Object.assign(S, keep); S.resetIdx = null; S.kResetIdx = null; S.shifts = []; S.lastAuto = null; testAimMode = true; S.test.aim = autoAim(); S.rounds = blankRounds(); S.date = localDate(); selCell = null; autoOverride(); changed();
 };
 window.addEventListener('resize', () => { drawTest(); drawSheet(); if (curTab === 'env') resize3d(); });
 
+
+// ================= 습사 기록 달력 (기기에 저장) =================
+// 하루 한 장: 날짜별로 그날의 시지·기압·바람을 이 기기(브라우저/앱)에 저장한다
+const LOG_KEY = 'gukgung-log';
+function logLoad(){ try { const d = JSON.parse(localStorage.getItem(LOG_KEY) || 'null'); return d && d.days ? d : { v: 1, days: {} }; } catch (e) { return { v: 1, days: {} }; } }
+function logStore(L){ try { localStorage.setItem(LOG_KEY, JSON.stringify(L)); return true; } catch (e) { return false; } }
+function dayStats(rounds){
+  let hits = 0, rec = 0, bad = 0; const per = [];
+  rounds.forEach(row => { let n = 0, m = 0; row.forEach(p => { if (isRec(p)) { m++; rec++; if (p.bad) bad++; if (isHit(p)) { n++; hits++; } } }); per.push(m ? n : null); });
+  return { hits, rec, bad, per };
+}
+function logEntryFromS(){
+  const st = dayStats(S.rounds);
+  let story = '', wind = null;
+  try { if (A && A.wind) { story = windStory(); wind = { x: +A.wind.x.toFixed(2), z: +A.wind.z.toFixed(2) }; } } catch (e) {}
+  return { date: S.date || localDate(), place: S.place || '', savedAt: Date.now(), pressure: S.pressure, tempC: S.tempC,
+    wind0: { ...S.wind0 }, wind, story, hits: st.hits, rec: st.rec, bad: st.bad, per: st.per,
+    rounds: JSON.parse(JSON.stringify(S.rounds)), testShots: JSON.parse(JSON.stringify(S.test.shots || [])), testAim: { ...S.test.aim } };
+}
+// 시지 기록이 하나라도 있으면 그날 장부를 늘 최신으로 덮어쓴다 (저장 버튼을 깜빡해도 남도록)
+function logAutoSave(){
+  if (!S.rounds.some(r => r.some(isRec))) return;
+  const L = logLoad(); L.days[S.date || localDate()] = logEntryFromS(); logStore(L);
+}
+function logMoveDate(from, to){
+  if (!from || from === to) return;
+  const L = logLoad(); if (L.days[from] && !L.days[to]) { L.days[to] = { ...L.days[from], date: to }; delete L.days[from]; logStore(L); }
+}
+// 날짜가 바뀐 뒤 앱을 열면: 지난 기록은 달력에 남기고 오늘 시지는 새로 시작한다 (개인 기준은 그대로)
+function logRollover(){
+  const today = localDate();
+  if (!S.date || S.date === today) return null;
+  const had = S.rounds.some(r => r.some(isRec));
+  if (had) { const L = logLoad(); L.days[S.date] = L.days[S.date] || logEntryFromS(); logStore(L); }
+  const old = S.date;
+  if (had || (S.test.shots && S.test.shots.length)) {
+    S.rounds = blankRounds(); S.test.shots = []; S.resetIdx = null; S.kResetIdx = null; S.shifts = []; S.lastAuto = null;
+  }
+  S.date = today; save();
+  return had ? old : null;
+}
+let calYM = null, calSel = null, calDelArm = null;
+function openCal(){
+  const L = logLoad(), today = localDate();
+  if (!calYM) { const d = new Date(); calYM = { y: d.getFullYear(), m: d.getMonth() }; }
+  if (!calSel) calSel = L.days[today] ? today : Object.keys(L.days).sort().slice(-1)[0] || null;
+  $('calModal').hidden = false; renderCal();
+}
+function renderCal(){
+  const L = logLoad(), today = localDate(), { y, m } = calYM;
+  $('calTitle').textContent = `${y}년 ${m + 1}월`;
+  const first = new Date(y, m, 1).getDay(), nd = new Date(y, m + 1, 0).getDate();
+  let h = ['일','월','화','수','목','금','토'].map((d, i) => `<div class="cal-h${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}">${d}</div>`).join('');
+  for (let i = 0; i < first; i++) h += '<div></div>';
+  let monthHits = 0, monthRec = 0, monthDays = 0;
+  for (let d = 1; d <= nd; d++) {
+    const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`, e = L.days[key];
+    const dow = (first + d - 1) % 7;
+    let badge = '';
+    if (e && e.rec) {
+      monthHits += e.hits; monthRec += e.rec; monthDays++;
+      const r = e.hits / Math.max(1, e.rec - (e.bad || 0));
+      badge = `<span class="cal-b" style="background:${r >= 0.6 ? '#2f7d4f' : r >= 0.35 ? '#d9901a' : '#a8402c'}">${e.hits}중</span><span class="cal-n">${e.rec}시</span>`;
+    }
+    h += `<button class="cal-d${e ? ' has' : ''}${key === today ? ' today' : ''}${key === calSel ? ' sel' : ''}${dow === 0 ? ' sun' : dow === 6 ? ' sat' : ''}" data-k="${key}"><span class="cal-dn">${d}</span>${badge}</button>`;
+  }
+  $('calGrid').innerHTML = h;
+  $('calMonth').innerHTML = monthDays ? `이번 달 <b>${monthDays}일</b> 습사 · <b>${monthHits}중 / ${monthRec}시</b> (${fmt(monthHits / monthRec * 100, 0)}%)` : '이번 달 저장된 기록이 없습니다';
+  $('calGrid').querySelectorAll('.cal-d').forEach(b => b.onclick = () => { calSel = b.dataset.k; renderCal(); });
+  renderCalDay(L.days[calSel], calSel);
+}
+function renderCalDay(e, key){
+  const box = $('calDay');
+  if (!key) { box.innerHTML = '<div class="note">기록이 있는 날짜를 누르면 그날 시지가 보입니다.</div>'; return; }
+  if (!e) { box.innerHTML = `<div class="note">${key} — 저장된 기록이 없습니다.</div>`; return; }
+  const dt = new Date(key + 'T00:00:00'), wd = '일월화수목금토'[dt.getDay()];
+  const w0 = e.wind || e.wind0 || { x: 0, z: 0 };
+  let tbl = `<table class="sheet cal-sheet"><tr><th>순</th>${[1,2,3,4,5].map(i => `<th>${i}시</th>`).join('')}<th>중</th></tr>`;
+  e.rounds.forEach((row, r) => {
+    if (!row.some(isRec)) return;
+    tbl += `<tr><th>${r + 1}</th>${row.map(p => `<td><span class="cell">${miniSVG(p)}${isRec(p) ? `<span class="mk ${isHit(p) ? 'h' : 'x'}">${isHit(p) ? '○' : '×'}</span>` : ''}${p && p.bad ? '<span class="bd">잘</span>' : ''}</span></td>`).join('')}<td class="cnt">${e.per[r] ?? ''}</td></tr>`;
+  });
+  tbl += '</table>';
+  box.innerHTML = `<div class="cal-dh"><b>${dt.getMonth() + 1}월 ${dt.getDate()}일 (${wd})</b>${e.place ? ` · ${e.place}` : ''}</div>
+    <div class="cal-big"><span>${e.hits}중</span> / ${e.rec}시${e.rec ? ` · 적중률 ${fmt(e.hits / Math.max(1, e.rec - (e.bad || 0)) * 100, 0)}%` : ''}${e.bad ? ` <small>(잘못쏨 ${e.bad}발 제외)</small>` : ''}</div>
+    <div class="note" style="margin:2px 0 6px">${e.pressure} hPa · ${e.tempC}°C · ${windWords(w0) || '바람 거의 없음'}</div>
+    ${e.story ? `<div class="cal-story">${e.story}</div>` : ''}
+    ${tbl}
+    <div class="actions" style="margin-top:8px"><button class="btn" id="calDel">이 날 기록 삭제</button></div>`;
+  $('calDel').onclick = () => {
+    if (!calDelArm) { $('calDel').textContent = '한 번 더 누르면 삭제'; calDelArm = setTimeout(() => { calDelArm = null; const b = $('calDel'); if (b) b.textContent = '이 날 기록 삭제'; }, 2500); return; }
+    clearTimeout(calDelArm); calDelArm = null;
+    const L = logLoad(); delete L.days[key]; logStore(L); renderCal();
+  };
+}
+$('calBtn').onclick = openCal;
+$('calClose').onclick = () => { $('calModal').hidden = true; };
+$('calModal').addEventListener('pointerdown', e => { if (e.target === $('calModal')) $('calModal').hidden = true; });
+$('calPrev').onclick = () => { calYM.m--; if (calYM.m < 0) { calYM.m = 11; calYM.y--; } renderCal(); };
+$('calNext').onclick = () => { calYM.m++; if (calYM.m > 11) { calYM.m = 0; calYM.y++; } renderCal(); };
+$('sLog').onclick = () => {
+  if (!S.rounds.some(r => r.some(isRec))) { toast('아직 시지 기록이 없습니다'); return; }
+  const L = logLoad(); L.days[S.date || localDate()] = logEntryFromS();
+  if (!logStore(L)) { toast('저장하지 못했습니다 (기기 저장 공간 확인)'); return; }
+  toast(`${S.date} 기록을 달력에 저장했습니다`); calSel = S.date; const d = new Date(S.date + 'T00:00:00'); calYM = { y: d.getFullYear(), m: d.getMonth() };
+};
+function toast(msg){
+  let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('on'), 2600);
+}
+
 // ================= 시작 =================
+const rolledFrom = logRollover();
 followPressure(); buildSheet(); analyze(); renderTestSide(); renderSettings(); updateSky(); setView('side');
 showTab(S.test.aimSet && (S.test.shots.length >= 5 || S.rounds.some(r => r.some(isRec))) ? 'sheet' : 'test');
+autoOverride(); renderSheet();
+if (rolledFrom) setTimeout(() => toast(`지난 습사(${rolledFrom}) 기록은 📅 기록 달력에 저장해 두었습니다. 오늘 시지는 새로 시작합니다.`), 400);
 requestAnimationFrame(loop);
 
 })();

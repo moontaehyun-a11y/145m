@@ -1,6 +1,6 @@
 // 국궁 시뮬레이터 오프라인 작동용 서비스 워커
 // 새 버전을 올릴 때 VERSION 숫자를 바꾸면 쓰는 사람들 기기에서도 새 파일로 바뀝니다.
-const VERSION = 'gukgung-v1';
+const VERSION = 'gukgung-v3';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 const CDN = [
   'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js',
