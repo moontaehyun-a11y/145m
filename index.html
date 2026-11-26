@@ -172,6 +172,20 @@ td.cnt{font-weight:800;font-size:15px;color:var(--red);font-family:'Noto Serif K
 .devask .dv-s{font-size:12.5px;line-height:1.55;margin:6px 0 10px}
 .devask .dv-b{display:flex;gap:8px;justify-content:center}.devask .dv-b .btn{min-width:96px;font-weight:700;font-size:15px}
 @media (max-width:600px){.devask{top:120px;width:calc(100% - 24px)}}
+.wxbox{margin:8px 0 4px;padding:8px 10px;border:1px dashed var(--line);border-radius:10px;background:rgba(255,255,255,.55)}
+.wx-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.wx-info{font-size:12px;line-height:1.55;margin-top:6px;color:var(--ink)}
+.wx-info:empty{display:none}
+.wx-info.err{color:#a8402c}
+.wx-info.err .wx-steps,.wx-info.err .note{color:var(--ink)}
+.wx-steps{margin:6px 0 8px;padding-left:18px}.wx-steps li{margin:2px 0}
+#wxHits{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.wx-hit{font-size:12px;padding:6px 8px}
+.wx-dir{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.wx-dirbtns{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.wx-dirbtns button{font:inherit;font-size:11.5px;padding:6px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+.wx-dirbtns button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.linkbtn{font:inherit;font-size:11.5px;border:0;background:none;color:var(--blue);text-decoration:underline;cursor:pointer;padding:0 2px}
+.wxbox input{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:6px}
 .drawer{position:fixed;inset:0;z-index:50;background:rgba(31,28,24,.35);display:flex;justify-content:flex-end}
 .drawer[hidden]{display:none}
 #no3d[hidden]{display:none !important}
@@ -247,6 +261,16 @@ textarea{font:12px ui-monospace,Menlo,monospace}
   #tipSheet .aw-s{font-size:10px}
   #tipSheet .rs-note{display:none}
 }
+@media (max-width:860px){
+  /* 세로 화면: 과녁을 위에 붙여 두고 그 아래로 슬라이더가 지나가게 → 과녁을 보면서 조정 */
+  #tab-test .board{position:sticky;top:var(--hh);z-index:6;background:var(--paper);height:46vh;box-shadow:0 6px 10px -8px rgba(0,0,0,.35)}
+}
+@media (max-width:600px){
+  #tab-test .board{height:auto}
+  #tab-test .board canvas{height:34vh;min-height:230px}
+  #tab-test .board .floatbtn{padding:6px 4px;font-size:12.5px}
+  #tab-test .board .tip{font-size:12px;padding:4px 8px}
+}
 </style>
 </head>
 <body>
@@ -283,6 +307,17 @@ textarea{font:12px ui-monospace,Menlo,monospace}
           <div class="wlab"><span>← 맞바람</span><span>순풍 →</span></div>
           <div class="slider"><span>앞뒤 바람</span><input id="tWx" type="range" min="-8" max="8" step="0.1"><output id="tWxO"></output></div>
           <div class="psign" id="wxSign"></div>
+          <div class="wxbox">
+            <div class="wx-row"><button class="btn pri" id="wxGet">📍 현재 위치 날씨 불러오기</button><span class="note" id="wxRange" style="margin:0"></span></div>
+            <div class="wx-dir" id="wxDir" hidden>
+              <div class="lab" style="margin-bottom:4px"><b style="color:var(--ink)">사대 → 과녁 방향</b> (이 활터에서 한 번만 정하면 됩니다)</div>
+              <div class="wx-dirbtns" id="wxDirBtns"></div>
+              <div class="wx-row" style="margin-top:6px"><button class="btn" id="wxCompass">📱 휴대폰 나침반으로 재기</button><span class="note" id="wxCompassV" style="margin:0"></span></div>
+              <div class="wx-row" style="margin-top:6px"><label class="note" style="margin:0">각도 <input id="wxDeg" type="number" min="0" max="359" inputmode="numeric" style="width:64px"> °</label><label class="note" style="margin:0">활터 이름 <input id="wxName" type="text" placeholder="예: 황학정" style="width:120px"></label></div>
+              <div class="wx-row" style="margin-top:8px"><button class="btn red" id="wxDirSave" disabled>이 방향으로 저장하고 바람 넣기</button><button class="btn" id="wxDirCancel">취소</button></div>
+            </div>
+            <div class="wx-info" id="wxInfo"></div>
+          </div>
           <details class="wguide"><summary>바람 세기 보는 법 (m/s별 징후)</summary><div id="wGuide"></div></details>
           <div class="pinfo" id="pInfo"></div>
           <div class="persinfo" style="margin-top:10px">기압·바람 슬라이더대로 옮겨진 표가 <b>심하게 맞지 않을 때</b> 아래 <b>⚙ 개인 기준 설정</b>을 열어 내 기준으로 조정하세요.
@@ -2095,6 +2130,169 @@ function toast(msg){
   let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
   t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('on'), 2600);
 }
+
+
+// ================= 현재 위치 날씨 불러오기 (Open-Meteo) =================
+// GPS로 위치 → Open-Meteo에서 해면기압·기온·바람(10 m) → 활터의 사대→과녁 방향 기준으로 맞바람/순풍·좌우 바람으로 나눠 1단계에 넣는다
+const RANGE_KEY = 'gukgung-ranges';
+const DIR16 = ['북','북북동','북동','동북동','동','동남동','남동','남남동','남','남남서','남서','서남서','서','서북서','북서','북북서'];
+const dirName = deg => DIR16[Math.round(((deg % 360) + 360) % 360 / 22.5) % 16];
+function rangesLoad(){ try { return JSON.parse(localStorage.getItem(RANGE_KEY) || '[]'); } catch (e) { return []; } }
+function rangesStore(a){ try { localStorage.setItem(RANGE_KEY, JSON.stringify(a)); } catch (e) {} }
+function distKm(a, b){ const R = 6371, r = Math.PI / 180, dLa = (b.lat - a.lat) * r, dLo = (b.lon - a.lon) * r; const h = Math.sin(dLa / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
+function nearestRange(pos){
+  let best = null; rangesLoad().forEach(g => { const d = distKm(pos, g); if (d < 1.5 && (!best || d < best.d)) best = { ...g, d }; }); return best;
+}
+// 풍향(바람이 불어오는 방위) θ, 과녁 방향 β → x(+순풍), z(+왼쪽에서)
+function windToRange(speed, fromDeg, bearing){
+  const phi = (fromDeg - bearing) * Math.PI / 180;
+  return { x: -speed * Math.cos(phi), z: -speed * Math.sin(phi) };
+}
+let wxPending = null;   // 방향을 아직 정하지 않은 활터에서 받아 둔 날씨
+function wxMsg(html, err){ const el = $('wxInfo'); el.innerHTML = html; el.classList.toggle('err', !!err); }
+function getPos(){
+  return new Promise((res, rej) => {
+    if (!navigator.geolocation) return rej(new Error('nogeo'));
+    navigator.geolocation.getCurrentPosition(p => res({ lat: p.coords.latitude, lon: p.coords.longitude, acc: p.coords.accuracy }), e => rej(e), { enableHighAccuracy: true, timeout: 12000, maximumAge: 120000 });
+  });
+}
+async function fetchWx(pos){
+  const u = `https://api.open-meteo.com/v1/forecast?latitude=${pos.lat.toFixed(4)}&longitude=${pos.lon.toFixed(4)}&current=pressure_msl,temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=ms&timezone=auto`;
+  const ac = new AbortController(), to = setTimeout(() => ac.abort(), 12000);
+  try {
+    const r = await fetch(u, { signal: ac.signal, cache: 'no-store' });
+    if (!r.ok) throw new Error('http ' + r.status);
+    const j = await r.json(), c = j.current;
+    if (!c || c.pressure_msl == null) throw new Error('nodata');
+    return { time: c.time, p: c.pressure_msl, t: c.temperature_2m, v: c.wind_speed_10m, dir: c.wind_direction_10m, gust: c.wind_gusts_10m };
+  } finally { clearTimeout(to); }
+}
+function applyWx(wx, range){
+  const w = windToRange(wx.v, wx.dir, range.bearing);
+  S.pressure = clamp(Math.round(wx.p), 960, 1050);
+  if (wx.t != null) S.tempC = clamp(Math.round(wx.t), -20, 40);
+  S.wind0 = { x: +clamp(w.x, -8, 8).toFixed(1), z: +clamp(w.z, -8, 8).toFixed(1) };
+  S.wxLast = { ...wx, range: range.name, bearing: range.bearing, at: Date.now() };
+  setAtmosphere(S.pressure, S.tempC); followPressure(); changed(); updateSky();
+  renderWxInfo();
+}
+function renderWxInfo(){
+  const L = S.wxLast; if (!L) { wxMsg(''); return; }
+  const hm = (L.time || '').slice(11, 16), w0 = S.wind0 || { x: 0, z: 0 };
+  const parts = [Math.abs(w0.x) >= 0.05 ? `${w0.x < 0 ? '맞바람' : '순풍'} ${fmt(Math.abs(w0.x))}` : '', Math.abs(w0.z) >= 0.05 ? `${w0.z > 0 ? '왼쪽에서' : '오른쪽에서'} ${fmt(Math.abs(w0.z))}` : ''].filter(Boolean).join(' · ') || '바람 거의 없음';
+  wxMsg(`<b>${hm} 기준</b> · ${Math.round(L.p)} hPa · ${fmt(L.t, 0)}°C · ${dirName(L.dir)}풍 ${fmt(L.v)} m/s${L.gust != null ? ` (돌풍 ${fmt(L.gust)})` : ''}<br>
+    → ${L.range ? `<b>${L.range}</b> ` : ''}과녁 방향 ${dirName(L.bearing)}(${Math.round(L.bearing)}°) 기준 <b>${parts} m/s</b>를 넣었습니다. 지역 평균 바람이라 활터 바람과 다를 수 있으니 시사로 확인하세요. <span style="color:var(--ink3,#8a8478)">날씨: Open-Meteo</span>`);
+}
+
+// 위치 권한이 없을 때: 웹 앱은 휴대폰 설정 화면을 직접 열 수 없으므로, 기기별로 켜는 길을 안내하고 지역 이름 검색으로도 날씨를 받을 수 있게 한다
+function showLocHelp(denied){
+  const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const inFrame = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+  const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  let steps;
+  if (inFrame) steps = `<li>지금 화면은 <b>Claude 대화 속 미리보기</b>라서 휴대폰 설정과 상관없이 위치를 쓸 수 없습니다. <b>홈 화면에 설치한 앱</b>에서 눌러 주세요.</li><li>여기서는 아래 <b>지역 이름으로 찾기</b>를 쓰면 날씨를 받을 수 있습니다.</li>`;
+  else if (ios) steps = `<li>아이폰·아이패드 <b>설정</b> 앱 → <b>개인정보 보호 및 보안</b> → <b>위치 서비스</b>를 켭니다.</li><li>같은 화면 아래 <b>Safari 웹 사이트</b> → <b>앱을 사용하는 동안</b>을 고릅니다.${standalone ? ' (홈 화면 앱도 이 설정을 따릅니다)' : ''}</li><li>Safari에서 쓰는 중이면 주소창 왼쪽 <b>가가(aA)</b> → <b>웹 사이트 설정</b> → <b>위치</b> → <b>허용</b>.</li><li>이 앱으로 돌아와 <b>다시 시도</b>를 누릅니다.</li>`;
+  else steps = `<li>휴대폰 <b>설정</b> → <b>위치</b>를 켭니다.</li><li>Chrome 주소창 왼쪽 <b>자물쇠(또는 ⓘ)</b> → <b>권한</b> → <b>위치</b> → <b>허용</b>.${standalone ? ' 홈 화면 앱이면 앱 아이콘 길게 누르기 → <b>앱 정보</b> → <b>권한</b> → <b>위치</b>.' : ''}</li><li>이 앱으로 돌아와 <b>다시 시도</b>를 누릅니다.</li>`;
+  wxMsg(`<b>${denied ? '위치 권한이 꺼져 있습니다.' : '위치를 확인하지 못했습니다.'}</b> 웹 앱은 휴대폰 설정 화면을 바로 열 수 없어서, 아래 순서로 켜 주세요.<ol class="wx-steps">${steps}</ol>
+    <div class="wx-row"><button class="btn" id="wxRetry">↻ 다시 시도</button></div>
+    <div class="wx-row" style="margin-top:6px"><input id="wxQ" type="text" placeholder="지역·활터 동네 이름 (예: 종로구 사직동)" style="flex:1;min-width:150px"><button class="btn" id="wxSearch">🔎 지역 이름으로 찾기</button></div>
+    <div id="wxHits"></div>`, true);
+  $('wxRetry').onclick = wxGet;
+  $('wxSearch').onclick = wxSearch;
+  $('wxQ').addEventListener('keydown', e => { if (e.key === 'Enter') wxSearch(); });
+}
+// Open-Meteo 지역 검색(무료) → 고른 지역 좌표로 날씨 받기
+async function wxSearch(){
+  const q = $('wxQ').value.trim(); if (!q) return;
+  const box = $('wxHits'); box.innerHTML = '<div class="note">찾는 중…</div>';
+  const term = q.split(/\s+/).slice(-1)[0];   // 검색은 마지막 낱말(동·읍·구 이름)로
+  try {
+    const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(term)}&count=10&language=ko&countryCode=KR&format=json`, { cache: 'no-store' });
+    const j = await r.json(), hits = (j.results || []);
+    if (!hits.length) { box.innerHTML = '<div class="note">찾지 못했습니다. 동·읍·면·구 이름 하나만 넣어 보세요 (예: 사직동).</div>'; return; }
+    box.innerHTML = hits.map((h, i) => `<button class="btn wx-hit" data-i="${i}">${h.name}${h.admin2 ? ` · ${h.admin2}` : ''}${h.admin1 ? ` · ${h.admin1}` : ''}</button>`).join('');
+    box.querySelectorAll('.wx-hit').forEach(b => b.onclick = async () => {
+      const h = hits[+b.dataset.i], pos = { lat: h.latitude, lon: h.longitude };
+      box.innerHTML = '';
+      try {
+        wxMsg('⛅ 날씨를 불러오는 중…');
+        const wx = await fetchWx(pos), rg = nearestRange(pos);
+        if (!rg) { wxPending = { wx, pos }; openDirSetup(pos, null); $('wxName').value = $('wxName').value || h.name; wxMsg(`<b>${h.name}</b> 날씨를 받았습니다. 아래에서 <b>사대 → 과녁 방향</b>을 정하면 바람이 바로 들어갑니다.`); return; }
+        applyWx(wx, rg); $('wxRange').innerHTML = `활터: <b>${rg.name}</b> · 과녁 ${dirName(rg.bearing)}`;
+      } catch (e) { wxMsg('날씨를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.', true); }
+    });
+  } catch (e) { box.innerHTML = '<div class="note">검색하지 못했습니다. 인터넷 연결을 확인해 주세요.</div>'; }
+}
+async function wxGet(){
+  const btn = $('wxGet'); btn.disabled = true; wxMsg('📍 위치를 확인하는 중…');
+  try {
+    let pos = null, rg = null;
+    try { pos = await getPos(); }
+    catch (e) {
+      const all = rangesLoad().sort((a, b) => (b.used || 0) - (a.used || 0));
+      if (!all.length) { showLocHelp(e && e.code === 1); return; }
+      rg = all[0]; pos = { lat: rg.lat, lon: rg.lon }; 
+    }
+    if (!rg) rg = nearestRange(pos);
+    wxMsg('⛅ 날씨를 불러오는 중…');
+    const wx = await fetchWx(pos);
+    if (!rg) { wxPending = { wx, pos }; openDirSetup(pos, null); wxMsg('처음 온 활터입니다. 아래에서 <b>사대 → 과녁 방향</b>을 정하면 바람이 바로 들어갑니다.'); return; }
+    const all = rangesLoad(); const it = all.find(g => g.id === rg.id); if (it) { it.used = Date.now(); rangesStore(all); }
+    applyWx(wx, rg); $('wxRange').innerHTML = `활터: <b>${rg.name}</b> · 과녁 ${dirName(rg.bearing)} <button class="linkbtn" id="wxRedo">방향 다시 정하기</button>`; $('wxRedo').onclick = () => { wxPending = { wx, pos, id: rg.id }; openDirSetup(pos, rg); };
+  } catch (e) {
+    wxMsg('날씨를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요. (안 되면 지금처럼 슬라이더로 맞추면 됩니다)', true);
+  } finally { btn.disabled = false; }
+}
+// ---- 활터 방향 정하기 ----
+let dirSel = null, compassOn = false, compassDeg = null;
+function openDirSetup(pos, rg){
+  $('wxDir').hidden = false; dirSel = rg ? rg.bearing : null;
+  $('wxName').value = rg ? rg.name : (S.place || '');
+  $('wxDeg').value = dirSel != null ? Math.round(dirSel) : '';
+  renderDirBtns();
+}
+function renderDirBtns(){
+  $('wxDirBtns').innerHTML = DIR16.map((n, i) => `<button data-d="${i * 22.5}" class="${dirSel != null && Math.round(dirSel / 22.5) % 16 === i ? 'on' : ''}">${n}</button>`).join('');
+  $('wxDirBtns').querySelectorAll('button').forEach(b => b.onclick = () => { dirSel = +b.dataset.d; $('wxDeg').value = Math.round(dirSel); renderDirBtns(); });
+  $('wxDirSave').disabled = dirSel == null;
+}
+$('wxDeg').addEventListener('input', () => { const v = +$('wxDeg').value; if ($('wxDeg').value !== '' && v >= 0 && v < 360) { dirSel = v; renderDirBtns(); } });
+function onOrient(e){
+  let h = null;
+  if (e.webkitCompassHeading != null) h = e.webkitCompassHeading;           // iPhone·iPad
+  else if (e.absolute && e.alpha != null) h = (360 - e.alpha) % 360;        // 안드로이드
+  if (h == null) return;
+  compassDeg = h; $('wxCompassV').textContent = `${dirName(h)} ${Math.round(h)}°`;
+}
+$('wxCompass').onclick = async () => {
+  if (compassOn) {   // 두 번째 누름: 지금 방향으로 정하기
+    if (compassDeg != null) { dirSel = compassDeg; $('wxDeg').value = Math.round(dirSel); renderDirBtns(); }
+    stopCompass(); return;
+  }
+  try { if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) { const r = await DeviceOrientationEvent.requestPermission(); if (r !== 'granted') throw 0; } }
+  catch (e) { $('wxCompassV').textContent = '나침반 권한이 없습니다 — 방위 버튼으로 골라 주세요'; return; }
+  compassOn = true; compassDeg = null;
+  window.addEventListener('deviceorientationabsolute', onOrient); window.addEventListener('deviceorientation', onOrient);
+  $('wxCompass').textContent = '✓ 이 방향으로 정하기'; $('wxCompassV').textContent = '휴대폰 윗부분을 과녁 쪽으로 향하세요…';
+};
+function stopCompass(){ compassOn = false; window.removeEventListener('deviceorientationabsolute', onOrient); window.removeEventListener('deviceorientation', onOrient); $('wxCompass').textContent = '📱 휴대폰 나침반으로 재기'; }
+$('wxDirCancel').onclick = () => { stopCompass(); $('wxDir').hidden = true; if (!S.wxLast) wxMsg(''); else renderWxInfo(); };
+$('wxDirSave').onclick = () => {
+  if (dirSel == null || !wxPending) return;
+  stopCompass();
+  const all = rangesLoad(), name = $('wxName').value.trim() || `활터 ${all.length + 1}`;
+  let rg = wxPending.id ? all.find(g => g.id === wxPending.id) : null;
+  if (rg) { rg.bearing = dirSel; rg.name = name; rg.used = Date.now(); }
+  else { rg = { id: Date.now().toString(36), name, lat: wxPending.pos.lat, lon: wxPending.pos.lon, bearing: dirSel, used: Date.now() }; all.push(rg); }
+  rangesStore(all);
+  if (!S.place) S.place = name;
+  $('wxDir').hidden = true;
+  applyWx(wxPending.wx, rg);
+  $('wxRange').innerHTML = `활터: <b>${rg.name}</b> · 과녁 ${dirName(rg.bearing)} <button class="linkbtn" id="wxRedo">방향 다시 정하기</button>`;
+  const keep = wxPending; $('wxRedo').onclick = () => { wxPending = { ...keep, id: rg.id }; openDirSetup(keep.pos, rg); };
+};
+$('wxGet').onclick = wxGet;
+renderWxInfo();
 
 // ================= 시작 =================
 const rolledFrom = logRollover();

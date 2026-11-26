@@ -1,6 +1,6 @@
 // 국궁 시뮬레이터 오프라인 작동용 서비스 워커
 // 새 버전을 올릴 때 VERSION 숫자를 바꾸면 쓰는 사람들 기기에서도 새 파일로 바뀝니다.
-const VERSION = 'gukgung-v3';
+const VERSION = 'gukgung-v4';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 const CDN = [
   'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js',
@@ -27,6 +27,8 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  // 날씨 정보(Open-Meteo)는 저장하지 않고 늘 새로 받는다
+  if (new URL(req.url).hostname.endsWith('open-meteo.com')) return;
   // 페이지: 인터넷이 되면 최신 파일, 안 되면 저장해 둔 파일
   if (req.mode === 'navigate') {
     e.respondWith((async () => {
